@@ -25,11 +25,11 @@
                         <li>
                             <form action="#" method="#">
                                 @csrf
-                                <button type="submit" class="dropdown-item">Barang Masuk</button>
+                                <li><a class="nav-link scrollto" href="{{ route('barangmasuk') }}">Barang Masuk</a></li>
                             </form>
                             <form action="#" method="#">
                                 @csrf
-                                <button type="submit" class="dropdown-item">Barang Keluar</button>
+                                <li><a class="nav-link scrollto" href="{{ route('barangkeluar') }}">Barang Keluar</a></li>
                             </form>
                         </li>
                     </ul>
