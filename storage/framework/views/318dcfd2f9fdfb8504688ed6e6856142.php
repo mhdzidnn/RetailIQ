@@ -25,11 +25,11 @@
                         <li>
                             <form action="#" method="#">
                                 <?php echo csrf_field(); ?>
-                                <button type="submit" class="dropdown-item">Barang Masuk</button>
+                                <li><a class="nav-link scrollto" href="<?php echo e(route('barangmasuk')); ?>">Barang Masuk</a></li>
                             </form>
                             <form action="#" method="#">
                                 <?php echo csrf_field(); ?>
-                                <button type="submit" class="dropdown-item">Barang Keluar</button>
+                                <li><a class="nav-link scrollto" href="<?php echo e(route('barangkeluar')); ?>">Barang Keluar</a></li>
                             </form>
                         </li>
                     </ul>

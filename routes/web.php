@@ -5,7 +5,8 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\IncomingController;
+use App\Http\Controllers\BarangmasukController;
+use App\Http\Controllers\BarangkeluarController;
 
 
 /*
@@ -36,8 +37,23 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Inventory
 ----------------------------------------------*/
 Route::middleware(['auth'])->group(function () {  // TODO Add multi-auth:client
-
+    Route::get('/barangmasuk', [BarangmasukController::class, 'index'])->name('barangmasuk');
+    Route::get('/barangmasuk/create-masuk', [BarangmasukController::class, 'create'])->name('create');
+    Route::post('/barangmasuk/store-masuk',  [BarangmasukController::class, 'store'])->name('store');
+    Route::get('/barangmasuk/edit-masuk/{id}', [BarangmasukController::class, 'edit'])->name('edit');
+    Route::post('/barangmasuk/update-masuk/{id}', [BarangmasukController::class, 'update'])->name('update');
+    Route::get('/barangmasuk/delete-masuk/{id}', [BarangmasukController::class, 'destroy'])->name('delete');
 });
+
+Route::middleware(['auth'])->group(function () {  // TODO Add multi-auth:client
+    Route::get('/barangkeluar', [BarangkeluarController::class, 'index'])->name('barangkeluar');
+    Route::get('/barangkeluar/create-keluar', [BarangkeluarController::class, 'create'])->name('create');
+    Route::post('/barangkeluar/store-keluar',  [BarangkeluarController::class, 'store'])->name('store');
+    Route::get('/barangkeluar/edit-keluar/{id}', [BarangkeluarController::class, 'edit'])->name('edit');
+    Route::post('/barangkeluar/update-keluar/{id}', [BarangkeluarController::class, 'update'])->name('update');
+    Route::get('/barangkeluar/delete-keluar/{id}', [BarangkeluarController::class, 'destroy'])->name('delete');
+});
+
 
 /*----------------------------------------------
 Finance
@@ -60,5 +76,3 @@ Contact Us
 ----------------------------------------------*/
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');
 Route::post('/contact-us/store', [ContactUsController::class, 'store'])->name('store-contact-us');
-
-
