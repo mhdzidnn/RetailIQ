@@ -1,6 +1,4 @@
-@extends('layouts.main')
-
-@section('container')
+<?php $__env->startSection('container'); ?>
     <section>
         <!-- ======= Create Inventory Section ======= -->
         <section id="contact" class="contact">
@@ -13,8 +11,8 @@
                 <div class="row">
                     <div class="d-flex justify-content-center">
                         <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-                            <form action="{{ route('store-keluar') }}" method="post" class="php-email-form">
-                                @csrf
+                            <form action="<?php echo e(route('store-keluar')); ?>" method="post" class="php-email-form">
+                                <?php echo csrf_field(); ?>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="nama_barang">Nama Customer</label>
                                     <input type="text" name="nama_customer" class="form-control" id="nama_customer"
@@ -60,4 +58,6 @@
             </div>
         </section><!-- End Contact Us Section -->
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\putramaajid\RetailIQ\resources\views/barangkeluar/create-keluar.blade.php ENDPATH**/ ?>

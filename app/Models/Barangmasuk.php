@@ -19,10 +19,9 @@ class Barangmasuk extends Model
         'user_id',
         'nama_barang',
         'harga_beli',
-        'harga_jual',
         'kategori',
         'jumlah_stok',
-        'jumlah_terjual'
+
     ];
 
     public function user(): BelongsTo

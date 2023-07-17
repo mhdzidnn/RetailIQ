@@ -50,7 +50,7 @@ class BarangkeluarController extends Controller
             'jumlah_terjual' => $request->jumlah_terjual
         ]);
 
-        return redirect('/index-keluar');
+        return redirect('/barangkeluar');
     }
 
     /**

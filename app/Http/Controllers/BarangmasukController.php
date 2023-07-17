@@ -41,16 +41,15 @@ class BarangmasukController extends Controller
         $user = Auth::user(); // Get the currently authenticated user
 
         Barangmasuk::create([
-            'user_id' => $user->id,
+            'user_id' => $user->id, // Mengubah menjadi $user->id
             'nama_barang' => $request->nama_barang,
             'harga_beli' => $request->harga_beli,
-            'harga_jual' => $request->harga_jual,
             'kategori' => $request->kategori,
             'jumlah_stok' => $request->jumlah_stok,
-            'jumlah_terjual' => $request->jumlah_terjual
         ]);
 
-        return redirect('/index-masuk');
+
+        return redirect('/barangmasuk');
     }
 
     /**
@@ -68,7 +67,7 @@ class BarangmasukController extends Controller
     {
         $selected = Barangmasuk::findOrFail($id);
         return view('barangmasuk.edit-masuk', [
-            'title' => 'Edit Barang Masuk', 
+            'title' => 'Edit Barang Masuk',
             'selected' => $selected
         ]);
     }
