@@ -36,30 +36,26 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 /*----------------------------------------------
 Inventory
 ----------------------------------------------*/
-Route::middleware(['auth'])->group(function () {  // TODO Add multi-auth:client
-    Route::get('/barangmasuk', [BarangmasukController::class, 'index'])->name('barangmasuk');
-    Route::get('/barangmasuk/create-masuk', [BarangmasukController::class, 'create'])->name('create');
-    Route::post('/barangmasuk/store-masuk',  [BarangmasukController::class, 'store'])->name('store');
-    Route::get('/barangmasuk/edit-masuk/{id}', [BarangmasukController::class, 'edit'])->name('edit');
-    Route::post('/barangmasuk/update-masuk/{id}', [BarangmasukController::class, 'update'])->name('update');
-    Route::get('/barangmasuk/delete-masuk/{id}', [BarangmasukController::class, 'destroy'])->name('delete');
-});
-
-Route::middleware(['auth'])->group(function () {  // TODO Add multi-auth:client
-    Route::get('/barangkeluar', [BarangkeluarController::class, 'index'])->name('barangkeluar');
-    Route::get('/barangkeluar/create-keluar', [BarangkeluarController::class, 'create'])->name('create');
-    Route::post('/barangkeluar/store-keluar',  [BarangkeluarController::class, 'store'])->name('store');
-    Route::get('/barangkeluar/edit-keluar/{id}', [BarangkeluarController::class, 'edit'])->name('edit');
-    Route::post('/barangkeluar/update-keluar/{id}', [BarangkeluarController::class, 'update'])->name('update');
-    Route::get('/barangkeluar/delete-keluar/{id}', [BarangkeluarController::class, 'destroy'])->name('delete');
-});
-
-
-/*----------------------------------------------
-Finance
-----------------------------------------------*/
 Route::middleware(['auth'])->group(function () {
+    // Routing untuk fitur barang masuk
+    Route::prefix('barangmasuk')->group(function () {
+        Route::get('/', [BarangmasukController::class, 'index'])->name('barangmasuk');
+        Route::get('/create-masuk', [BarangmasukController::class, 'create'])->name('create');
+        Route::post('/store-masuk', [BarangmasukController::class, 'store'])->name('store');
+        Route::get('/edit-masuk/{id}', [BarangmasukController::class, 'edit'])->name('edit');
+        Route::post('/update-masuk/{id}', [BarangmasukController::class, 'update'])->name('update');
+        Route::get('/delete-masuk/{id}', [BarangmasukController::class, 'destroy'])->name('delete');
+    });
 
+    // Routing untuk fitur barang keluar
+    Route::prefix('barangkeluar')->group(function () {
+        Route::get('/', [BarangkeluarController::class, 'index'])->name('barangkeluar');
+        Route::get('/create-keluar', [BarangkeluarController::class, 'create'])->name('create-keluar');
+        Route::post('/store-keluar', [BarangkeluarController::class, 'store'])->name('store-keluar');
+        Route::get('/edit-keluar/{id}', [BarangkeluarController::class, 'edit'])->name('edit-keluar');
+        Route::post('/update-keluar/{id}', [BarangkeluarController::class, 'update'])->name('update-keluar');
+        Route::get('/delete-keluar/{id}', [BarangkeluarController::class, 'destroy'])->name('delete-keluar');
+    });
 });
 
 /*----------------------------------------------

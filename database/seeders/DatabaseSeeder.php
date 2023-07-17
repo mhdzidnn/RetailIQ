@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             InventorySeeder::class,
             ContactUsSeeder::class,
+            Barangkeluarseeder::class,
         ]);
     }
 }

@@ -11,7 +11,7 @@
                 <div class="d-flex justify-content-center">
                     <div class="php-email-form">
                         <div class="create mb-3">
-                            <a href="{{ route('create') }}" class="btn-create"><i class="bi bi-plus-square"></i>
+                            <a href="{{ route('create-keluar') }}" class="btn-create"><i class="bi bi-plus-square"></i>
                                 Input Barang Keluar</a>
                         </div>
                         <div class="col-lg-12 mt-lg-0 d-flex align-items-stretch mx-auto" data-aos="fade-up"
@@ -33,15 +33,16 @@
                                     @foreach ($barangkeluar as $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
+                                            <td>{{$item->nama_customer}}</td>
                                             <td>{{ $item->nama_barang }}</td>
                                             <td>Rp{{ number_format($item->harga_jual, 0, ',', '.') }}</td>
                                             <td>{{ $item->kategori }}</td>
                                             <td>{{ $item->tanggal_beli }}</td>
                                             <td>{{ $item->jumlah_terjual }}</td>
                                             <td>
-                                                <a href="{{ route('edit', ['id' => $item->id]) }}"
+                                                <a href="{{ route('edit-keluar', ['id' => $item->id]) }}"
                                                     class="btn-edit">Edit</a>
-                                                <a href="{{ route('delete', ['id' => $item->id]) }}"
+                                                <a href="{{ route('delete-keluar', ['id' => $item->id]) }}"
                                                     class="btn-delete">Delete</a>
                                                 {{-- <button class="btn btn-danger btn-sm hapus" data-toggle="modal"
                                                     data-target="#ModalDelete" data-id='#'><i
