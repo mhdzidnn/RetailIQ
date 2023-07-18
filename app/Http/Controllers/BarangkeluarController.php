@@ -93,6 +93,6 @@ class BarangkeluarController extends Controller
     {
         $selected = Barangkeluar::findOrFail($id);
         $selected->delete();
-        return redirect('/index-keluar');
+        return redirect('/barangkeluar');
     }
 }
