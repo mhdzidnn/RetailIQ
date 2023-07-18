@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('container'); ?>
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
@@ -11,7 +9,7 @@
                 <div class="d-flex justify-content-center">
                     <div class="php-email-form">
                         <div class="create mb-3">
-                            <a href="<?php echo e(route('create')); ?>" class="btn-create"><i class="bi bi-plus-square"></i>
+                            <a href="<?php echo e(route('create-keluar')); ?>" class="btn-create"><i class="bi bi-plus-square"></i>
                                 Input Barang Keluar</a>
                         </div>
                         <div class="col-lg-12 mt-lg-0 d-flex align-items-stretch mx-auto" data-aos="fade-up"
@@ -33,15 +31,16 @@
                                     <?php $__currentLoopData = $barangkeluar; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
                                             <td><?php echo e($item->id); ?></td>
+                                            <td><?php echo e($item->nama_customer); ?></td>
                                             <td><?php echo e($item->nama_barang); ?></td>
                                             <td>Rp<?php echo e(number_format($item->harga_jual, 0, ',', '.')); ?></td>
                                             <td><?php echo e($item->kategori); ?></td>
                                             <td><?php echo e($item->tanggal_beli); ?></td>
                                             <td><?php echo e($item->jumlah_terjual); ?></td>
                                             <td>
-                                                <a href="<?php echo e(route('edit', ['id' => $item->id])); ?>"
+                                                <a href="<?php echo e(route('edit-keluar', ['id' => $item->id])); ?>"
                                                     class="btn-edit">Edit</a>
-                                                <a href="<?php echo e(route('delete', ['id' => $item->id])); ?>"
+                                                <a href="<?php echo e(route('delete-keluar', ['id' => $item->id])); ?>"
                                                     class="btn-delete">Delete</a>
                                                 
                                             </td>
@@ -59,4 +58,5 @@
 
     </section>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\juand\OneDrive - ypt.or.id\SEMESTER 4\PEMPROGRAMAN FRAMEWORK\tubes\RetailIQ\resources\views/barangkeluar/index-keluar.blade.php ENDPATH**/ ?>
