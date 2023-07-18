@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\BarangmasukController;
 use App\Http\Controllers\BarangkeluarController;
+use App\Http\Controllers\FinanceController;
 
 
 /*
@@ -59,12 +60,11 @@ Route::middleware(['auth'])->group(function () {
 });
 
 /*----------------------------------------------
-Incoming
+Finance
 ----------------------------------------------*/
 Route::middleware(['auth'])->group(function () {
-
+    Route::get('/finance', [FinanceController::class, 'index'])->middleware('auth')->name('finance');
 });
-
 
 
 /*----------------------------------------------

@@ -1,0 +1,91 @@
+                                        +-------------------+
+                                        |     users         |
+                                        +-------------------+
+                                        | id (PK)           |
+                                        | user_id           |
+                                        | name              |
+                                        | email             |
+                                        | email_verified_at |
+                                        | password          |
+                                        | rememberToken     |
+                                        | created_at        |
+                                        | updated_at        |
+                                        +-------------------+
+                                                 |
+                                                 |
+                                                 |
+                                 +-----------------|-----------------+
+                                 |                 |                 |
+                                 |                 |                 |
+                     +----------------+   +----------------+   +----------------+
+                     |  barangmasuk   |   |  barangkeluar  |   |    inventory   |
+                     +----------------+   +----------------+   +----------------+
+                     | id (PK)        |   | id (PK)        |   | id (PK)        |
+                     | user_id (FK)   |   | user_id (FK)   |   | user_id (FK)   |
+                     | nama_barang    |   | nama_customer  |   | nama_barang    |
+                     | harga_beli     |   | nama_barang    |   | harga_beli     |
+                     | kategori       |   | harga_jual     |   | harga_jual     |
+                     | jumlah_stok    |   | kategori       |   | kategori       |
+                     | created_at     |   | tanggal_beli   |   | jumlah_stok    |
+                     | updated_at     |   | jumlah_terjual |   | jumlah_terjual |
+                     +----------------+   | created_at     |   | created_at     |
+                                          | updated_at     |   | updated_at     |
+                                          +----------------+   +----------------+
+
+
+                                        +-------------------+
+                                        |      finance      |
+                                        +-------------------+
+                                        | id (PK)           |
+                                        | total_pengeluaran |
+                                        | total_pemasukan   |
+                                        | total_keuntungan  |
+                                        | created_at        |
+                                        | updated_at        |
+                                        +-------------------+
+
+1. Tabel "barangmasuk" dan "barangkeluar" memiliki relasi many-to-one dengan tabel "users" menggunakan foreign key "user_id".
+2. Tabel "inventory" memiliki relasi one-to-one dengan tabel "users" menggunakan foreign key "user_id".
+3. Tidak ada relasi antara tabel "finance" dengan tabel lainnya karena tabel "finance" digunakan untuk menyimpan data analisis keuangan secara keseluruhan.
+
+Tabel "users":
++----+---------+------+-------------------+----------+------------+------------------+---------------------+
+| id | user_id | name | email             | password | created_at | updated_at       | email_verified_at   |
++----+---------+------+-------------------+----------+------------+------------------+---------------------+
+| 1  | 12345   | John | john@example.com  | ******** | 2023-07-01 | 2023-07-01 12:00 | 2023-07-01 12:00:00 |
+| 2  | 67890   | Jane | jane@example.com  | ******** | 2023-07-02 | 2023-07-02 09:30 | 2023-07-02 09:30:00 |
++----+---------+------+-------------------+----------+------------+------------------+---------------------+
+
+Tabel "barangmasuk":
++----+---------+--------------+------------+---------+--------------+---------------------+
+| id | user_id | nama_barang  | harga_beli | kategori| jumlah_stok  | created_at          |
++----+---------+--------------+------------+---------+--------------+---------------------+
+| 1  | 12345   | Barang A     | 10000.00   | A       | 50           | 2023-07-01 08:00:00 |
+| 2  | 12345   | Barang B     | 15000.00   | B       | 30           | 2023-07-01 09:30:00 |
+| 3  | 67890   | Barang C     | 20000.00   | A       | 20           | 2023-07-02 10:00:00 |
++----+---------+--------------+------------+---------+--------------+---------------------+
+
+Tabel "barangkeluar":
++----+---------+---------------+-------------+---------+---------------+------------+---------------------+
+| id | user_id | nama_customer | nama_barang | harga_jual | kategori      | tanggal_beli| jumlah_terjual | created_at          |
++----+---------+---------------+-------------+------------+---------------+-------------+----------------+---------------------+
+| 1  | 12345   | Customer X    | Barang A    | 15000.00   | A             | 2023-07-01  | 10             | 2023-07-01 10:00:00 |
+| 2  | 67890   | Customer Y    | Barang C    | 25000.00   | A             | 2023-07-02  | 5              | 2023-07-02 11:30:00 |
+| 3  | 67890   | Customer Z    | Barang C    | 25000.00   | A             | 2023-07-02  | 10             | 2023-07-02 12:00:00 |
++----+---------+---------------+-------------+------------+---------------+-------------+----------------+---------------------+
+
+Tabel "inventory":
++----+---------+--------------+------------+------------+---------+--------------+---------------------+
+| id | user_id | nama_barang  | harga_beli | harga_jual | kategori| jumlah_stok  | jumlah_terjual | created_at          |
++----+---------+--------------+------------+------------+---------+--------------+----------------+---------------------+
+| 1  | 12345   | Barang A     | 10000.00   | 15000.00   | A       | 40           | 10             | 2023-07-01 12:00:00 |
+| 2  | 12345   | Barang B     | 15000.00   | -          | B       | 30           | 0              | 2023-07-01 12:00:00 |
+| 3  | 67890   | Barang C     | 20000.00   | 25000.00   | A       | 10           | 15             | 2023-07-01 12:00:00 |
++----+---------+--------------+------------+------------+---------+--------------+----------------+---------------------+
+
+Tabel "finance":
++----+---------------------+---------------------+---------------------+
+| id | total_pengeluaran   | total_pemasukan     | total_keuntungan    | created_at          |
++----+---------------------+---------------------+---------------------+
+| 1  | 100000.00           | 200000.00           | 100000.00           | 2023-07-01 12:00:00 |
++----+---------------------+---------------------+---------------------+

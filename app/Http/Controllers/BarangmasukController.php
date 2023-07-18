@@ -92,6 +92,6 @@ class BarangmasukController extends Controller
     {
         $selected = Barangmasuk::findOrFail($id);
         $selected->delete();
-        return redirect('/index-masuk');
+        return redirect('/barangmasuk');
     }
 }

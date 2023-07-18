@@ -34,9 +34,7 @@
                                             <td>{{ $item->nama_barang }}</td>
                                             <td>{{ $item->kategori }}</td>
                                             <td>Rp{{ number_format($item->harga_beli, 0, ',', '.') }}</td>
-                                            <td>Rp{{ number_format($item->harga_jual, 0, ',', '.') }}</td>
                                             <td>{{ $item->jumlah_stok }}</td>
-                                            <td>{{ $item->jumlah_terjual }}</td>
                                             <td>
                                                 <a href="{{ route('edit', ['id' => $item->id]) }}"
                                                     class="btn-edit">Edit</a>
