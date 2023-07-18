@@ -1,9 +1,5 @@
 <?php
-
-namespace Database\Seeders;
-
 use App\Models\Barangkeluar;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class BarangkeluarSeeder extends Seeder
