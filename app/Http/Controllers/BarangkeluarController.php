@@ -6,6 +6,8 @@ use App\Http\Requests\BarangkeluarRequest;
 use App\Models\Barangkeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Inventory;
+use Illuminate\Support\Facades\DB;
 
 class BarangkeluarController extends Controller
 {
@@ -45,10 +47,17 @@ class BarangkeluarController extends Controller
             'nama_customer' => $request->nama_customer,
             'nama_barang' => $request->nama_barang,
             'harga_jual' => $request->harga_jual,
-            'kategori' => $request->kategori,
             'tanggal_beli' => $request->tanggal_beli,
             'jumlah_terjual' => $request->jumlah_terjual
         ]);
+        //  // Update entri Inventory
+        $inventory = Inventory::where('nama_barang', $request->nama_barang)->first();
+
+        if ($inventory) {
+            $inventory->stok -= $request->jumlah_terjual;
+            $inventory->jumlah_terjual += $request->jumlah_terjual;
+            $inventory->save();
+        }
 
         return redirect('/barangkeluar');
     }
@@ -93,6 +102,6 @@ class BarangkeluarController extends Controller
     {
         $selected = Barangkeluar::findOrFail($id);
         $selected->delete();
-        return redirect('/index-keluar');
+        return redirect('/barangkeluar');
     }
 }

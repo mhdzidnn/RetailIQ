@@ -17,9 +17,8 @@ class BarangmasukRequest extends FormRequest
             // Atur aturan validasi untuk setiap field yang dibutuhkan
 
             'nama_barang' => 'required',
-            'harga_beli' => 'required|numeric',
-            'kategori' => 'required',
-            'jumlah_stok' => 'required|numeric'
+            'harga_awal' => 'required|numeric',
+            'jumlah' => 'required|numeric'
         ];
     }
 }
