@@ -23,9 +23,8 @@
                                         <th scope="col">Nama Customer</th>
                                         <th scope="col">Nama Barang</th>
                                         <th scope="col">Harga Jual</th>
-                                        <th scope="col">Kategori</th>
                                         <th scope="col">Tanggal Beli</th>
-                                        <th scope="col">Jumlah Terjual</th>
+                                        <th scope="col">Jumlah Barang Keluar</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -36,7 +35,6 @@
                                             <td>{{$item->nama_customer}}</td>
                                             <td>{{ $item->nama_barang }}</td>
                                             <td>Rp{{ number_format($item->harga_jual, 0, ',', '.') }}</td>
-                                            <td>{{ $item->kategori }}</td>
                                             <td>{{ $item->tanggal_beli }}</td>
                                             <td>{{ $item->jumlah_terjual }}</td>
                                             <td>

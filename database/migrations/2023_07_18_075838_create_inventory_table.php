@@ -12,14 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('inventory', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('nama_barang');
-            $table->decimal('harga_beli', 14, 2);
-            $table->decimal('harga_jual', 14, 2);
-            $table->string('kategori');
-            $table->integer('jumlah_stok');
-            $table->integer('jumlah_terjual');
+            $table->decimal('harga_awal', 14, 2)->nullable();
+            $table->decimal('harga_jual', 14, 2)->nullable();
+            $table->integer('stok')->default(0);
+            $table->integer('jumlah_terjual')->default(0);
             $table->timestamps();
         });
     }
