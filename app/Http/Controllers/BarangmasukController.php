@@ -6,6 +6,8 @@ use App\Http\Requests\BarangmasukRequest;
 use App\Models\Barangmasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Inventory;
+use Illuminate\Support\Facades\DB;
 
 class BarangmasukController extends Controller
 {
@@ -43,10 +45,18 @@ class BarangmasukController extends Controller
         Barangmasuk::create([
             'user_id' => $user->id, // Mengubah menjadi $user->id
             'nama_barang' => $request->nama_barang,
-            'harga_beli' => $request->harga_beli,
-            'kategori' => $request->kategori,
-            'jumlah_stok' => $request->jumlah_stok,
+            'harga_awal' => $request->harga_awal,
+            'jumlah' => $request->jumlah,
         ]);
+
+        // // Update atau buat entri Inventory
+        $inventory = Inventory::updateOrCreate(
+            ['nama_barang' => $request->nama_barang],
+            [
+                'harga_awal' => $request->harga_awal,
+                'stok' => DB::raw('stok + ' . $request->jumlah),
+            ]
+        );
 
 
         return redirect('/barangmasuk');

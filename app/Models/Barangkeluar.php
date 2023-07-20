@@ -20,7 +20,6 @@ class Barangkeluar extends Model
         'nama_customer',
         'nama_barang',
         'harga_jual',
-        'kategori',
         'tanggal_beli',
         'jumlah_terjual'
     ];

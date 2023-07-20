@@ -20,22 +20,17 @@
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="nama_barang">Nama Barang</label>
-                                    <input type="text" name="nama_barang" class="form-control" id="nama_barang"
-                                        placeholder="Masukkan nama barang" required>
+                                    <select class="form-control" name="nama_barang" id="nama_barang" required>
+                                        <option disabled selected>-- Pilih Kategori --</option>
+                                        <option value="Air Galon Aqua">Air Galon Aqua</option>
+                                        <option value="Air Galon Sanford">Air Galon Sanford</option>
+                                        <option value="Air Galon Mindy">Air Galon Mindy</option>
+                                    </select>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="harga_jual">Harga Jual</label>
                                     <input type="number" class="form-control" name="harga_jual" id="harga_jual"
                                         placeholder="0" min="0" step="1000" required>
-                                </div>
-
-                                <div class="form-group mt-3 mb-3">
-                                    <label for="kategori">Kategori</label>
-                                    <select class="form-control" name="kategori" id="kategori" required>
-                                        <option disabled selected>-- Pilih Kategori --</option>
-                                        <option value="Sepatu">Sepatu</option>
-                                        <option value="Baju">Baju</option>
-                                    </select>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="tanggal_beli">Tanggal Beli</label>

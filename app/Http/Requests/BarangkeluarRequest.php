@@ -18,7 +18,6 @@ class BarangkeluarRequest extends FormRequest
             'nama_customer' => 'required',
             'nama_barang' => 'required',
             'harga_jual' => 'required|numeric',
-            'kategori' => 'required',
             'tanggal_beli' => 'required',
             'jumlah_terjual' => 'required|numeric'
         ];
