@@ -16,8 +16,8 @@
             <ul>
                 <li><a class="nav-link scrollto" href="{{ route('landing-page') }}">Home</a></li>
                 @auth
-                <li><a class="nav-link scrollto" href="#">Inventory</a></li>
-                <li><a class="nav-link scrollto" href="#">Finance</a></li>
+                <li><a class="nav-link scrollto" href="{{ route('inventory') }}">Inventory</a></li>
+                <li><a class="nav-link scrollto" href="{{ route('finance') }}">Finance</a></li>
                 <li class="dropdown">
                     <a class="nav-link scrollto" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> incoming/outgoing  <i class="bi bi-chevron-down"></i>
                     </a>
@@ -25,11 +25,11 @@
                         <li>
                             <form action="#" method="#">
                                 @csrf
-                                <button type="submit" class="dropdown-item">Barang Masuk</button>
+                                <li><a class="nav-link scrollto" href="{{ route('barangmasuk') }}">Barang Masuk</a></li>
                             </form>
                             <form action="#" method="#">
                                 @csrf
-                                <button type="submit" class="dropdown-item">Barang Keluar</button>
+                                <li><a class="nav-link scrollto" href="{{ route('barangkeluar') }}">Barang Keluar</a></li>
                             </form>
                         </li>
                     </ul>
