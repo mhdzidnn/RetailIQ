@@ -21,9 +21,8 @@
                                         <th scope="col">Nama Customer</th>
                                         <th scope="col">Nama Barang</th>
                                         <th scope="col">Harga Jual</th>
-                                        <th scope="col">Kategori</th>
                                         <th scope="col">Tanggal Beli</th>
-                                        <th scope="col">Jumlah Terjual</th>
+                                        <th scope="col">Jumlah Barang Keluar</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -34,7 +33,6 @@
                                             <td><?php echo e($item->nama_customer); ?></td>
                                             <td><?php echo e($item->nama_barang); ?></td>
                                             <td>Rp<?php echo e(number_format($item->harga_jual, 0, ',', '.')); ?></td>
-                                            <td><?php echo e($item->kategori); ?></td>
                                             <td><?php echo e($item->tanggal_beli); ?></td>
                                             <td><?php echo e($item->jumlah_terjual); ?></td>
                                             <td>

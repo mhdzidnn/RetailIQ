@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nama_customer');
             $table->string('nama_barang');
             $table->decimal('harga_jual', 14, 2);
-            $table->string('kategori');
             $table->date('tanggal_beli');
             $table->integer('jumlah_terjual');
             $table->timestamps();

@@ -21,9 +21,8 @@
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Nama Barang</th>
-                                        <th scope="col">Kategori</th>
-                                        <th scope="col">Harga Beli</th>
-                                        <th scope="col">Jumlah Stok</th>
+                                        <th scope="col">Harga Awal</th>
+                                        <th scope="col">Jumlah Barang Masuk</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -32,9 +31,8 @@
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->nama_barang }}</td>
-                                            <td>{{ $item->kategori }}</td>
-                                            <td>Rp{{ number_format($item->harga_beli, 0, ',', '.') }}</td>
-                                            <td>{{ $item->jumlah_stok }}</td>
+                                            <td>Rp{{ number_format($item->harga_awal, 0, ',', '.') }}</td>
+                                            <td>{{ $item->jumlah}}</td>
                                             <td>
                                                 <a href="{{ route('edit', ['id' => $item->id]) }}"
                                                     class="btn-edit">Edit</a>
