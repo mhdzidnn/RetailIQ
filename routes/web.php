@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\BarangmasukController;
 use App\Http\Controllers\BarangkeluarController;
 use App\Http\Controllers\FinanceController;
+use App\Http\Controllers\InventoryController;
 
 
 /*
@@ -35,7 +36,7 @@ Route::middleware(['guest'])->group(function () {
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 /*----------------------------------------------
-Inventory
+Barang masuk keluar
 ----------------------------------------------*/
 Route::middleware(['auth'])->group(function () {
     // Routing untuk fitur barang masuk
@@ -66,6 +67,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/finance', [FinanceController::class, 'index'])->middleware('auth')->name('finance');
 });
 
+// Routing untuk fitur inventory
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('inventory')->group(function () {
+        Route::get('/', [InventoryController::class, 'index'])->name('inventory');
+        Route::delete('/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
+        // Tambahkan route lainnya sesuai kebutuhan Anda
+    });
+});
 
 /*----------------------------------------------
 Contact Us

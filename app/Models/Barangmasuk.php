@@ -18,9 +18,8 @@ class Barangmasuk extends Model
         'id',
         'user_id',
         'nama_barang',
-        'harga_beli',
-        'kategori',
-        'jumlah_stok',
+        'harga_awal',
+        'jumlah',
 
     ];
 
