@@ -1,1 +1,0 @@
-<?php /**PATH C:\Users\Dell\RetailIQ\resources\views/barangmasuk/edit-masuk.blade.php ENDPATH**/ ?>
