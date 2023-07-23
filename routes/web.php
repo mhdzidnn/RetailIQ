@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store-masuk', [BarangmasukController::class, 'store'])->name('store');
         Route::get('/edit-masuk/{id}', [BarangmasukController::class, 'edit'])->name('edit');
         Route::post('/update-masuk/{id}', [BarangmasukController::class, 'update'])->name('update');
+        Route::get('/show-masuk/{id}', [BarangmasukController::class, 'show'])->name('show');
         Route::get('/delete-masuk/{id}', [BarangmasukController::class, 'destroy'])->name('delete');
     });
 
@@ -81,3 +82,8 @@ Contact Us
 ----------------------------------------------*/
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');
 Route::post('/contact-us/store', [ContactUsController::class, 'store'])->name('store-contact-us');
+
+// route untuk download file
+Route::get('/barangmasuk/downloadfile/{barangmasukId}', [BarangmasukController::class, 'downloadFile'])
+    ->name('barangmasuk.downloadFile');
+
