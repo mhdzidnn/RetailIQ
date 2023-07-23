@@ -157,7 +157,7 @@ class BarangkeluarController extends Controller
             return response()->download($path, $barangkeluar->original_filename);
         } else {
             // Jika file tidak ditemukan, Anda dapat mengembalikan response sesuai kebutuhan.
-            return response()->json(['message' => 'File tidak ditemukan'], 404);}
+            return response()->json(['message' => 'File ini tidak ditemukan'], 404);}
     }
     public function exportExcel()
     {
