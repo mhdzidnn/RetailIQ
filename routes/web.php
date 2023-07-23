@@ -11,6 +11,7 @@ use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\InventoryController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +57,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store-keluar', [BarangkeluarController::class, 'store'])->name('store-keluar');
         Route::get('/edit-keluar/{id}', [BarangkeluarController::class, 'edit'])->name('edit-keluar');
         Route::post('/update-keluar/{id}', [BarangkeluarController::class, 'update'])->name('update-keluar');
+        Route::post('/show-keluar/{id}', [BarangkeluarController::class, 'show'])->name('show-keluar');
         Route::get('/delete-keluar/{id}', [BarangkeluarController::class, 'destroy'])->name('delete-keluar');
     });
 });
@@ -81,3 +83,16 @@ Contact Us
 ----------------------------------------------*/
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');
 Route::post('/contact-us/store', [ContactUsController::class, 'store'])->name('store-contact-us');
+Route::get('/barangkeluar/{id}', [BarangkeluarController::class, 'show'])->name('show-keluar');
+
+
+// routes/web.php
+
+
+Route::post('/barangkeluar/{id}/upload', 'BarangkeluarController@uploadFile')->name('barangkeluar.uploadFile');
+Route::get('/barangkeluar/{id}/download', 'BarangkeluarController@downloadFile')->name('barangkeluar.downloadFile');
+
+
+Route::get('exportExcel', [BarangkeluarController::class, 'exportExcel'])->name('barangkeluar.exportExcel');
+
+Route::get('exportPdf', [BarangkeluarController::class, 'exportPdf'])->name('barangkeluar.exportPdf');

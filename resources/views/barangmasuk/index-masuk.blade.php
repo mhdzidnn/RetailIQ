@@ -13,6 +13,7 @@
                         <div class="create mb-3">
                             <a href="{{ route('create') }}" class="btn-create"><i class="bi bi-plus-square"></i>
                                 Input Barang Masuk</a>
+                            
                         </div>
                         <div class="col-lg-12 mt-lg-0 d-flex align-items-stretch mx-auto" data-aos="fade-up"
                             data-aos-delay="200">
