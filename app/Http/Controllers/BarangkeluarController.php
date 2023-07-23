@@ -50,13 +50,26 @@ class BarangkeluarController extends Controller
             'tanggal_beli' => $request->tanggal_beli,
             'jumlah_terjual' => $request->jumlah_terjual
         ]);
-        //  // Update entri Inventory
+
+        // Lakukan proses pengurangan stok dan penambahan jumlah terjual pada inventory
         $inventory = Inventory::where('nama_barang', $request->nama_barang)->first();
 
         if ($inventory) {
-            $inventory->stok -= $request->jumlah_terjual;
-            $inventory->jumlah_terjual += $request->jumlah_terjual;
-            $inventory->save();
+            // Pastikan stok yang ada tidak kurang dari jumlah barang yang keluar
+            $stok_saat_ini = $inventory->stok;
+            $jumlah_keluar = $request->jumlah_terjual;
+            if ($stok_saat_ini >= $jumlah_keluar) {
+                $inventory->stok -= $jumlah_keluar;
+                $inventory->jumlah_terjual += $jumlah_keluar;
+                // Update atau tambahkan harga jual di inventory berdasarkan barang yang dikeluarkan
+                $inventory->harga_jual = $request->harga_jual;
+
+                $inventory->save();
+            } else {
+                // Tambahkan logika jika stok tidak mencukupi untuk barang yang keluar
+                // Misalnya, munculkan pesan error atau tampilkan halaman khusus
+                return redirect()->back()->with('error', 'Stok tidak mencukupi.');
+            }
         }
 
         return redirect('/barangkeluar');
