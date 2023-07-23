@@ -36,6 +36,8 @@
                                             <td>
                                                 <a href="{{ route('edit', ['id' => $item->id]) }}"
                                                     class="btn-edit">Edit</a>
+                                                <a href="{{ route('show', ['id' => $item->id]) }}"
+                                                    class="btn-edit">Show</a>
                                                 <a href="{{ route('delete', ['id' => $item->id]) }}"
                                                     class="btn-delete">Delete</a>
                                                 {{-- <button class="btn btn-danger btn-sm hapus" data-toggle="modal"
