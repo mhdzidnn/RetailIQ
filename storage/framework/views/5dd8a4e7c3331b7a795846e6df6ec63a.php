@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('container'); ?>
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
@@ -34,9 +32,7 @@
                                             <td><?php echo e($item->nama_barang); ?></td>
                                             <td><?php echo e($item->kategori); ?></td>
                                             <td>Rp<?php echo e(number_format($item->harga_beli, 0, ',', '.')); ?></td>
-                                            <td>Rp<?php echo e(number_format($item->harga_jual, 0, ',', '.')); ?></td>
                                             <td><?php echo e($item->jumlah_stok); ?></td>
-                                            <td><?php echo e($item->jumlah_terjual); ?></td>
                                             <td>
                                                 <a href="<?php echo e(route('edit', ['id' => $item->id])); ?>"
                                                     class="btn-edit">Edit</a>
@@ -58,4 +54,5 @@
 
     </section>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\juand\OneDrive - ypt.or.id\SEMESTER 4\PEMPROGRAMAN FRAMEWORK\tubes\RetailIQ\resources\views/barangmasuk/index-masuk.blade.php ENDPATH**/ ?>

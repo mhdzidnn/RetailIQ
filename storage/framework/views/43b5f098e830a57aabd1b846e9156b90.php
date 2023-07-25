@@ -19,9 +19,8 @@
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Nama Barang</th>
-                                        <th scope="col">Kategori</th>
-                                        <th scope="col">Harga Beli</th>
-                                        <th scope="col">Jumlah Stok</th>
+                                        <th scope="col">Harga Awal</th>
+                                        <th scope="col">Jumlah Barang Masuk</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -30,14 +29,13 @@
                                         <tr>
                                             <td><?php echo e($item->id); ?></td>
                                             <td><?php echo e($item->nama_barang); ?></td>
-                                            <td><?php echo e($item->kategori); ?></td>
-                                            <td>Rp<?php echo e(number_format($item->harga_beli, 0, ',', '.')); ?></td>
-                                            <td>Rp<?php echo e(number_format($item->harga_jual, 0, ',', '.')); ?></td>
-                                            <td><?php echo e($item->jumlah_stok); ?></td>
-                                            <td><?php echo e($item->jumlah_terjual); ?></td>
+                                            <td>Rp<?php echo e(number_format($item->harga_awal, 0, ',', '.')); ?></td>
+                                            <td><?php echo e($item->jumlah); ?></td>
                                             <td>
                                                 <a href="<?php echo e(route('edit', ['id' => $item->id])); ?>"
                                                     class="btn-edit">Edit</a>
+                                                <a href="<?php echo e(route('show', ['id' => $item->id])); ?>"
+                                                    class="btn-edit">Show</a>
                                                 <a href="<?php echo e(route('delete', ['id' => $item->id])); ?>"
                                                     class="btn-delete">Delete</a>
                                                 
@@ -56,4 +54,5 @@
 
     </section>
 <?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\putramaajid\RetailIQ\resources\views/barangmasuk/index-masuk.blade.php ENDPATH**/ ?>
