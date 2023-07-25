@@ -49,8 +49,6 @@
                                             <td>
                                                 <a href="{{ route('delete-keluar', ['id' => $item->id]) }}"
                                                     class="btn-delete">Delete</a>
-                                                <a href="{{ route('show-keluar', ['id' => $item->id]) }}"
-                                                    class="btn-edit">Show</a>
                                                 {{-- <button class="btn btn-danger btn-sm hapus" data-toggle="modal"
                                                     data-target="#ModalDelete" data-id='#'><i
                                                         class="fas fa-trash"></i></button> --}}
@@ -97,6 +95,16 @@
             </div>
         </div>
     </section>
+
+
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#barangkeluarTable').DataTable();
+            });
+        </script>
+    @endpush
 @endsection
 
 @vite('resources/js/app.js')

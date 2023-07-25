@@ -11,6 +11,7 @@ use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\InventoryController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +47,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store-masuk', [BarangmasukController::class, 'store'])->name('store');
         Route::get('/show-masuk/{id}', [BarangmasukController::class, 'show'])->name('show');
         Route::get('/delete-masuk/{id}', [BarangmasukController::class, 'destroy'])->name('delete');
+        Route::get('exportExcel', [BarangmasukController::class, 'exportExcel'])->name('barangmasuk.exportExcel');
+        Route::get('exportPdf', [BarangmasukController::class, 'exportPdf'])->name('barangmasuk.exportPdf');
     });
 
     // Routing untuk fitur barang keluar
@@ -53,8 +56,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [BarangkeluarController::class, 'index'])->name('barangkeluar');
         Route::get('/create-keluar', [BarangkeluarController::class, 'create'])->name('create-keluar');
         Route::post('/store-keluar', [BarangkeluarController::class, 'store'])->name('store-keluar');
-        Route::get('/show-keluar/{id}', [BarangkeluarController::class, 'show'])->name('show-keluar');
+        Route::get('/edit-keluar/{id}', [BarangkeluarController::class, 'edit'])->name('edit-keluar');
+        Route::post('/update-keluar/{id}', [BarangkeluarController::class, 'update'])->name('update-keluar');
         Route::get('/delete-keluar/{id}', [BarangkeluarController::class, 'destroy'])->name('delete-keluar');
+        Route::get('exportExcel', [BarangkeluarController::class, 'exportExcel'])->name('barangkeluar.exportExcel');
+        Route::get('exportPdf', [BarangkeluarController::class, 'exportPdf'])->name('barangkeluar.exportPdf');
     });
 });
 
@@ -83,16 +89,3 @@ Contact Us
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');
 Route::post('/contact-us/store', [ContactUsController::class, 'store'])->name('store-contact-us');
 
-// route untuk download file
-Route::get('/barangmasuk/downloadfile/{barangmasukId}', [BarangmasukController::class, 'downloadFile'])
-    ->name('barangmasuk.downloadFile');
-
-Route::get('barangmasuk/exportExcel', [BarangmasukController::class, 'exportExcel'])->name('barangmasuk.exportExcel');
-Route::get('barangmasuk/exportPdf', [BarangmasukController::class,'exportPdf'])->name('barangmasuk.exportPdf');
-
-Route::post('/barangkeluar/{id}/upload', 'BarangkeluarController@uploadFile')->name('barangkeluar.uploadFile');
-Route::get('/barangkeluar/{id}/download', 'BarangkeluarController@downloadFile')->name('barangkeluar.downloadFile');
-
-
-Route::get('barangkeluar/exportExcel', [BarangkeluarController::class, 'exportExcel'])->name('barangkeluar.exportExcel');
-Route::get('barangkeluar/exportPdf', [BarangkeluarController::class, 'exportPdf'])->name('barangkeluar.exportPdf');

@@ -47,8 +47,6 @@
                                             <td>
                                                 <a href="<?php echo e(route('delete-keluar', ['id' => $item->id])); ?>"
                                                     class="btn-delete">Delete</a>
-                                                <a href="<?php echo e(route('show-keluar', ['id' => $item->id])); ?>"
-                                                    class="btn-edit">Show</a>
                                                 
                                             </td>
                                             
@@ -63,6 +61,16 @@
             </div>
         </div>
     </section>
+
+
+
+    <?php $__env->startPush('scripts'); ?>
+        <script>
+            $(document).ready(function() {
+                $('#barangkeluarTable').DataTable();
+            });
+        </script>
+    <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo app('Illuminate\Foundation\Vite')('resources/js/app.js'); ?>

@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="d-flex justify-content-center">
                         <div class="col-lg-12 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-                            <form action="<?php echo e(route('store-keluar')); ?>" method="post" class="php-email-form">
+                            <form action="<?php echo e(route('store-keluar')); ?>" method="post" enctype="multipart/form-data" class="php-email-form">
                                 <?php echo csrf_field(); ?>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="nama_barang">Nama Customer</label>
@@ -20,22 +20,17 @@
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="nama_barang">Nama Barang</label>
-                                    <input type="text" name="nama_barang" class="form-control" id="nama_barang"
-                                        placeholder="Masukkan nama barang" required>
+                                    <select class="form-control" name="nama_barang" id="nama_barang" required>
+                                        <option disabled selected>-- Pilih Kategori --</option>
+                                        <option value="Air Galon Aqua">Air Galon Aqua</option>
+                                        <option value="Air Galon Sanford">Air Galon Sanford</option>
+                                        <option value="Air Galon Mindy">Air Galon Mindy</option>
+                                    </select>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="harga_jual">Harga Jual</label>
                                     <input type="number" class="form-control" name="harga_jual" id="harga_jual"
                                         placeholder="0" min="0" step="1000" required>
-                                </div>
-
-                                <div class="form-group mt-3 mb-3">
-                                    <label for="kategori">Kategori</label>
-                                    <select class="form-control" name="kategori" id="kategori" required>
-                                        <option disabled selected>-- Pilih Kategori --</option>
-                                        <option value="Sepatu">Sepatu</option>
-                                        <option value="Baju">Baju</option>
-                                    </select>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="tanggal_beli">Tanggal Beli</label>
@@ -46,6 +41,10 @@
                                     <label for="jumlah_terjual">Jumlah Terjual</label>
                                     <input type="number" class="form-control" name="jumlah_terjual" id="jumlah_terjual"
                                         placeholder="0" min="0" required>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="Invoice" class="form-label">Nota Penjualan(Invoice)</label>
+                                    <input type="file" class="form-control" name="Invoice" id="Invoice">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success">Simpan Data</button>
