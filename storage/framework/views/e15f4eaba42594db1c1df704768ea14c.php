@@ -72,7 +72,7 @@
                     data: [
                         <?php echo e($totalPengeluaran); ?>,
                         <?php echo e($totalPemasukan); ?>,
-                        <?php echo e(abs($totalKeuntungan)); ?>
+                        <?php echo e($totalKeuntungan); ?>
 
                     ],
                     backgroundColor: [

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BarangkeluarRequest;
+use App\Exports\BarangkeluarExport; // Pastikan Anda telah mengimpor BarangkeluarExport
 use App\Models\Barangkeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +49,8 @@ class BarangkeluarController extends Controller
             'nama_barang' => $request->nama_barang,
             'harga_jual' => $request->harga_jual,
             'tanggal_beli' => $request->tanggal_beli,
-            'jumlah_terjual' => $request->jumlah_terjual
+            'jumlah_terjual' => $request->jumlah_terjual,
+            
         ]);
         //  // Update entri Inventory
         $inventory = Inventory::where('nama_barang', $request->nama_barang)->first();
@@ -62,24 +64,20 @@ class BarangkeluarController extends Controller
         return redirect('/barangkeluar');
     }
 
+
     /**
      * Display the specified resource.
      */
-    public function show(Barangkeluar $barangkeluar)
+    public function show($id)
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $selected = Barangkeluar::findOrFail($id);
-        return view('barangkeluar.edit-keluar', [
-            'title' => 'Edit Barang Keluar',
-            'selected' => $selected
-        ]);
+
     }
 
     /**
@@ -101,7 +99,13 @@ class BarangkeluarController extends Controller
     public function destroy(string $id)
     {
         $selected = Barangkeluar::findOrFail($id);
+        // Hapus file CV jika ada
+        if ($selected->encrypted_filename) {
+            Storage::disk('public')->delete('files/' . $selected->encrypted_filename);
+        }
+
         $selected->delete();
         return redirect('/barangkeluar');
     }
 }
+

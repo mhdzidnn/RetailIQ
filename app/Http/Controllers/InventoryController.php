@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Events\InventoryUpdated;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 
@@ -43,6 +43,8 @@ class InventoryController extends Controller
             'jumlah_terjual' => $request->jumlah_terjual,
         ]);
 
+        event(new InventoryUpdated($inventory));
+
         return redirect('/inventory');
     }
 
@@ -73,6 +75,8 @@ class InventoryController extends Controller
             'stok' => $request->stok,
             'jumlah_terjual' => $request->jumlah_terjual,
         ]);
+
+        event(new InventoryUpdated($inventory));
 
         return redirect('/inventory');
     }

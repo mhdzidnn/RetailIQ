@@ -7,6 +7,11 @@ use App\Models\Barangmasuk;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BarangmasukExport;
+use PDF;
+
 
 class BarangmasukController extends Controller
 {
@@ -100,11 +105,6 @@ class BarangmasukController extends Controller
      */
     public function edit(string $id)
     {
-        $barangmasuk = Barangmasuk::findOrFail($id);
-        return view('barangmasuk.edit-masuk', [
-            'title' => 'Edit Barang Masuk',
-            'selected' => $barangmasuk
-        ]);
 
     }
 
@@ -113,26 +113,7 @@ class BarangmasukController extends Controller
      */
     public function update(BarangmasukRequest $request, $id)
     {
-        $data = $request->validated();
 
-        $barangmasuk = Barangmasuk::findOrFail($id);
-
-        // Handle file upload
-        if ($request->hasFile('Invoice')) {
-            // Hapus file CV lama jika ada
-            if ($barangmasuk->encrypted_filename) {
-                Storage::disk('public')->delete('files/' . $barangmasuk->encrypted_filename);
-            }
-
-            // Upload file CV yang baru
-            $file = $request->file('Invoice');
-            $data['original_filename'] = $file->getClientOriginalName();
-            $data['encrypted_filename'] = $file->storeAs('public/files', $file->hashName());
-        }
-
-        $barangmasuk->update($data);
-
-        return redirect('/barangmasuk');
     }
 
 
@@ -167,5 +148,19 @@ class BarangmasukController extends Controller
             return response()->json(['message' => 'File tidak ditemukan'], 404);
         }
     }
+
+    public function exportExcel()
+    {
+        return Excel::download(new BarangmasukExport, 'barangmasuk.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $barangmasuk = Barangmasuk::all();
+        $pdf = PDF::loadView('barangmasuk.export_pdf', compact('barangmasuk'));
+        return $pdf->download('barangmasuk.pdf');
+    }
+
+
 
 }

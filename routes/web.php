@@ -11,6 +11,7 @@ use App\Http\Controllers\FinanceController;
 use App\Http\Controllers\InventoryController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,10 +45,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [BarangmasukController::class, 'index'])->name('barangmasuk');
         Route::get('/create-masuk', [BarangmasukController::class, 'create'])->name('create');
         Route::post('/store-masuk', [BarangmasukController::class, 'store'])->name('store');
-        Route::get('/edit-masuk/{id}', [BarangmasukController::class, 'edit'])->name('edit');
-        Route::post('/update-masuk/{id}', [BarangmasukController::class, 'update'])->name('update');
         Route::get('/show-masuk/{id}', [BarangmasukController::class, 'show'])->name('show');
         Route::get('/delete-masuk/{id}', [BarangmasukController::class, 'destroy'])->name('delete');
+        Route::get('exportExcel', [BarangmasukController::class, 'exportExcel'])->name('barangmasuk.exportExcel');
+        Route::get('exportPdf', [BarangmasukController::class, 'exportPdf'])->name('barangmasuk.exportPdf');
     });
 
     // Routing untuk fitur barang keluar
@@ -58,6 +59,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit-keluar/{id}', [BarangkeluarController::class, 'edit'])->name('edit-keluar');
         Route::post('/update-keluar/{id}', [BarangkeluarController::class, 'update'])->name('update-keluar');
         Route::get('/delete-keluar/{id}', [BarangkeluarController::class, 'destroy'])->name('delete-keluar');
+        Route::get('exportExcel', [BarangkeluarController::class, 'exportExcel'])->name('barangkeluar.exportExcel');
+        Route::get('exportPdf', [BarangkeluarController::class, 'exportPdf'])->name('barangkeluar.exportPdf');
     });
 });
 
@@ -73,6 +76,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('inventory')->group(function () {
         Route::get('/', [InventoryController::class, 'index'])->name('inventory');
         Route::delete('/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
+        Route::get('inventory/edit/{id}', [InventoryController::class, 'edit'])->name('inventory.edit');
+        Route::put('inventory/update/{id}', [InventoryController::class, 'update'])->name('inventory.update');
+
         // Tambahkan route lainnya sesuai kebutuhan Anda
     });
 });
@@ -82,8 +88,4 @@ Contact Us
 ----------------------------------------------*/
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');
 Route::post('/contact-us/store', [ContactUsController::class, 'store'])->name('store-contact-us');
-
-// route untuk download file
-Route::get('/barangmasuk/downloadfile/{barangmasukId}', [BarangmasukController::class, 'downloadFile'])
-    ->name('barangmasuk.downloadFile');
 

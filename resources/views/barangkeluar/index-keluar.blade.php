@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <section id="contact" class="contact">
+<section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
             <div class="section-title mt-5">
                 <h1>Barang Keluar</h1>
@@ -12,11 +12,20 @@
                     <div class="php-email-form">
                         <div class="create mb-3">
                             <a href="{{ route('create-keluar') }}" class="btn-create"><i class="bi bi-plus-square"></i>
-                                Input Barang Keluar</a>
+                                Input Barang Keluar
+                            </a>
+                            <a href="{{ route('barangkeluar.exportExcel') }}" class="btn btn-outline-success">
+                                <i class="bi bi-download me-1"></i> to Excel
+                            </a>
+                            <li class="list-inline-item">
+                            <a href="{{ route('barangkeluar.exportPdf') }}" class="btn btn-outline-danger">
+                                <i class="bi bi-download me-1"></i> to PDF
+                            </a>
+                        </li>
                         </div>
                         <div class="col-lg-12 mt-lg-0 d-flex align-items-stretch mx-auto" data-aos="fade-up"
                             data-aos-delay="200">
-                            <table class="table table-striped">
+                            <table id="BarangkeluarTable" class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -38,8 +47,6 @@
                                             <td>{{ $item->tanggal_beli }}</td>
                                             <td>{{ $item->jumlah_terjual }}</td>
                                             <td>
-                                                <a href="{{ route('edit-keluar', ['id' => $item->id]) }}"
-                                                    class="btn-edit">Edit</a>
                                                 <a href="{{ route('delete-keluar', ['id' => $item->id]) }}"
                                                     class="btn-delete">Delete</a>
                                                 {{-- <button class="btn btn-danger btn-sm hapus" data-toggle="modal"
@@ -87,6 +94,24 @@
                 </div>
             </div>
         </div>
-
     </section>
+
+
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#barangkeluarTable').DataTable();
+            });
+        </script>
+    @endpush
 @endsection
+
+@vite('resources/js/app.js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#BarangkeluarTable').DataTable();
+    });
+</script>

@@ -37,14 +37,18 @@
     <script src="<?php echo e(asset('assets/vendor/glightbox/js/glightbox.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')); ?>"></script>
     <script src="<?php echo e(asset('assets/vendor/swiper/swiper-bundle.min.js')); ?>"></script>
-    
-    
+
 
     <!-- Template Main JS File -->
     <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
 
     <!-- Template Pie Chart -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+
+    <!-- Script DataTables -->
+    <script src="<?php echo e(asset('assets/vendor/datatables/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/vendor/datatables/dataTables.bootstrap4.min.js')); ?>"></script>
+
 </head>
 
 <body>
@@ -55,16 +59,9 @@
     <?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->yieldContent('scripts'); ?>
+
 </body>
 
-<!-- Vendor JS Files -->
-<script src="<?php echo e(asset('assets/vendor/jquery/jquery.min.js')); ?>"></script>  <!-- Add jQuery -->
-<script src="<?php echo e(asset('assets/vendor/aos/aos.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/vendor/glightbox/js/glightbox.min.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')); ?>"></script>
-<script src="<?php echo e(asset('assets/vendor/swiper/swiper-bundle.min.js')); ?>"></script>
-  
 
 <!-- Template Main JS File -->
 <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
