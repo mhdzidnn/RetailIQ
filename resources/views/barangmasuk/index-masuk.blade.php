@@ -1,6 +1,35 @@
 @extends('layouts.main')
 
 @section('container')
+
+@push('scripts')
+    <script type="module">
+        $(document).ready(function() {
+
+            $(".datatable").on("click", ".btn-delete", function (e) {
+                e.preventDefault();
+
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+
+                Swal.fire({
+                    title: "Yakin Ingin Menghapus\n" + name + "?",
+                    text: "Data Akan Terhapus!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "bg-danger",
+                    confirmButtonText: "Yakin!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
+
+
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
             <div class="section-title mt-5">
@@ -13,17 +42,24 @@
                         <div class="create mb-3">
                             <a href="{{ route('create') }}" class="btn-create"><i class="bi bi-plus-square"></i>
                                 Input Barang Masuk</a>
+
+                            <a href="{{ route('barangmasuk.exportExcel') }}" class="btn btn-outline-success">
+                                <i class="bi bi-download me-1"></i> to Excel
+                            </a>
+                            <a href="{{ route('barangmasuk.exportPdf') }}" class="btn btn-outline-danger">
+                                <i class="bi bi-download me-1"></i> to PDF
+                            </a>
+
                         </div>
                         <div class="col-lg-12 mt-lg-0 d-flex align-items-stretch mx-auto" data-aos="fade-up"
                             data-aos-delay="200">
-                            <table class="table table-striped">
+                            <table id="BarangmasukTable" class="table table-striped datatable">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Nama Barang</th>
-                                        <th scope="col">Kategori</th>
-                                        <th scope="col">Harga Beli</th>
-                                        <th scope="col">Jumlah Stok</th>
+                                        <th scope="col">Harga Awal</th>
+                                        <th scope="col">Jumlah Barang Masuk</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -32,20 +68,27 @@
                                         <tr>
                                             <td>{{ $item->id }}</td>
                                             <td>{{ $item->nama_barang }}</td>
-                                            <td>{{ $item->kategori }}</td>
-                                            <td>Rp{{ number_format($item->harga_beli, 0, ',', '.') }}</td>
-                                            <td>Rp{{ number_format($item->harga_jual, 0, ',', '.') }}</td>
-                                            <td>{{ $item->jumlah_stok }}</td>
-                                            <td>{{ $item->jumlah_terjual }}</td>
+                                            <td>Rp{{ number_format($item->harga_awal, 0, ',', '.') }}</td>
+                                            <td>{{ $item->jumlah}}</td>
                                             <td>
-                                                <a href="{{ route('edit', ['id' => $item->id]) }}"
-                                                    class="btn-edit">Edit</a>
-                                                <a href="{{ route('delete', ['id' => $item->id]) }}"
-                                                    class="btn-delete">Delete</a>
+                                                <div class="d-flex">
+                                                <a href="{{ route('show', ['id' => $item->id]) }}"
+                                                    class="btn-edit">Show</a>
+                                                <form action="{{ route('barangmasuk.destroy', ['id' => $item->id]) }}" method="POST">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn-delete" data-name="{{ $item->nama_barang}}">
+                                                            <i class="bi-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                {{-- <a href="{{ route('delete', ['id' => $item->id]) }}"
+                                                    class="btn-delete">Delete</a> --}}
                                                 {{-- <button class="btn btn-danger btn-sm hapus" data-toggle="modal"
                                                     data-target="#ModalDelete" data-id='#'><i
                                                         class="fas fa-trash"></i></button> --}}
-                                            </td>
+                                                </div>
+                                                </td>
+                                        </tr>
                                             {{-- <!-- Modal -->
                                             <div class="modal fade" id="ModalDelete" tabindex="-1"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -82,11 +125,14 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
 @endsection
+
+@vite('resources/js/app.js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+

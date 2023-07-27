@@ -16,8 +16,8 @@
             <ul>
                 <li><a class="nav-link scrollto" href="<?php echo e(route('landing-page')); ?>">Home</a></li>
                 <?php if(auth()->guard()->check()): ?>
-                <li><a class="nav-link scrollto" href="#">Inventory</a></li>
-                <li><a class="nav-link scrollto" href="#">Finance</a></li>
+                <li><a class="nav-link scrollto" href="<?php echo e(route('inventory')); ?>">Inventory</a></li>
+                <li><a class="nav-link scrollto" href="<?php echo e(route('finance')); ?>">Finance</a></li>
                 <li class="dropdown">
                     <a class="nav-link scrollto" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> incoming/outgoing  <i class="bi bi-chevron-down"></i>
                     </a>

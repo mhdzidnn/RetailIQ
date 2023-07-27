@@ -8,7 +8,7 @@
             <div class="container">
                 <div class="row gy-4">
                     <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                        <h1>Optimalkan Kinerja dan Keuntungan Bisnis</h1>
+                        <h1>Optimalkan Kinerja dan Keuntungan Bisnismu</h1>
                         <h2>Kelola barang masuk, barang keluar dan inventory anda, serta atur keuangan dengan lebih mudah dan efisien. Coba sekarang
                             untuk meningkatkan efektivitas toko anda!</h2>
                         <div>

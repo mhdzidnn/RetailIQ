@@ -1,7 +1,37 @@
 @extends('layouts.main')
 
 @section('container')
-    <section id="contact" class="contact">
+
+
+@push('scripts')
+    <script type="module">
+        $(document).ready(function() {
+
+            $(".datatable").on("click", ".btn-delete", function (e) {
+                e.preventDefault();
+
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+
+                Swal.fire({
+                    title: "Yakin Ingin Menghapus\n" + name + "?",
+                    text: "Data Akan Terhapus!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "bg-danger",
+                    confirmButtonText: "Yakin!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
+
+
+<section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
             <div class="section-title mt-5">
                 <h1>Barang Keluar</h1>
@@ -12,20 +42,28 @@
                     <div class="php-email-form">
                         <div class="create mb-3">
                             <a href="{{ route('create-keluar') }}" class="btn-create"><i class="bi bi-plus-square"></i>
-                                Input Barang Keluar</a>
+                                Input Barang Keluar
+                            </a>
+                            <a href="{{ route('barangkeluar.exportExcel') }}" class="btn btn-outline-success">
+                                <i class="bi bi-download me-1"></i> to Excel
+                            </a>
+                            <li class="list-inline-item">
+                            <a href="{{ route('barangkeluar.exportPdf') }}" class="btn btn-outline-danger">
+                                <i class="bi bi-download me-1"></i> to PDF
+                            </a>
+                        </li>
                         </div>
                         <div class="col-lg-12 mt-lg-0 d-flex align-items-stretch mx-auto" data-aos="fade-up"
                             data-aos-delay="200">
-                            <table class="table table-striped">
+                            <table id="BarangkeluarTable" class="table table-striped datatable">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
                                         <th scope="col">Nama Customer</th>
                                         <th scope="col">Nama Barang</th>
                                         <th scope="col">Harga Jual</th>
-                                        <th scope="col">Kategori</th>
                                         <th scope="col">Tanggal Beli</th>
-                                        <th scope="col">Jumlah Terjual</th>
+                                        <th scope="col">Jumlah Barang Keluar</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -36,14 +74,18 @@
                                             <td>{{$item->nama_customer}}</td>
                                             <td>{{ $item->nama_barang }}</td>
                                             <td>Rp{{ number_format($item->harga_jual, 0, ',', '.') }}</td>
-                                            <td>{{ $item->kategori }}</td>
                                             <td>{{ $item->tanggal_beli }}</td>
                                             <td>{{ $item->jumlah_terjual }}</td>
                                             <td>
-                                                <a href="{{ route('edit-keluar', ['id' => $item->id]) }}"
-                                                    class="btn-edit">Edit</a>
-                                                <a href="{{ route('delete-keluar', ['id' => $item->id]) }}"
-                                                    class="btn-delete">Delete</a>
+                                            <div class="d-flex">
+                                                <form action="{{ route('barangkeluar.destroy', ['id' => $item->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn-delete" data-name="{{ $item->nama_barang}}">
+                                                        <i class="bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                                 {{-- <button class="btn btn-danger btn-sm hapus" data-toggle="modal"
                                                     data-target="#ModalDelete" data-id='#'><i
                                                         class="fas fa-trash"></i></button> --}}
@@ -89,6 +131,12 @@
                 </div>
             </div>
         </div>
-
     </section>
+
+
+
 @endsection
+
+@vite('resources/js/app.js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+

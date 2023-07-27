@@ -16,8 +16,8 @@
             <ul>
                 <li><a class="nav-link scrollto" href="{{ route('landing-page') }}">Home</a></li>
                 @auth
-                <li><a class="nav-link scrollto" href="#">Inventory</a></li>
-                <li><a class="nav-link scrollto" href="#">Finance</a></li>
+                <li><a class="nav-link scrollto" href="{{ route('inventory') }}">Inventory</a></li>
+                <li><a class="nav-link scrollto" href="{{ route('finance') }}">Finance</a></li>
                 <li class="dropdown">
                     <a class="nav-link scrollto" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> incoming/outgoing  <i class="bi bi-chevron-down"></i>
                     </a>
