@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BarangmasukRequest;
-use App\Models\Barangmasuk;
-use App\Models\Inventory;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\BarangmasukExport;
 use PDF;
+use App\Models\Inventory;
+use App\Models\Barangmasuk;
+use App\Exports\BarangmasukExport;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\BarangmasukRequest;
 
 
 class BarangmasukController extends Controller
@@ -22,6 +23,7 @@ class BarangmasukController extends Controller
     {
         $user = Auth::user(); // Get the currently authenticated user
         $inventory = Barangmasuk::where('user_id', $user->id)->get(); // Fetch inventory data for the current user
+        confirmDelete();
 
         return view('barangmasuk.index-masuk', [
             'title' => 'Barang Masuk',
@@ -81,6 +83,8 @@ class BarangmasukController extends Controller
             ]
         );
 
+        Alert::success('Berhasil Ditambahkan', 'Data Berhasil Ditambahkan.');
+
         return redirect('/barangmasuk');
     }
 
@@ -131,6 +135,8 @@ class BarangmasukController extends Controller
 
         // Hapus data Barangmasuk
         $selected->delete();
+
+        Alert::success('Berhasil Dihapus', 'Data Berhasil Dihapus.');
 
         return redirect('/barangmasuk');
     }

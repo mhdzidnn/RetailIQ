@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="tanggal_beli">Tanggal Beli</label>
-                                    <input type="number" class="form-control" name="tanggal_beli" id="tanggal_beli"
+                                    <input type="date" class="form-control" name="tanggal_beli" id="tanggal_beli"
                                         placeholder="0" min="0" required>
                                 </div>
                                 <div class="form-group mt-3 mb-3">

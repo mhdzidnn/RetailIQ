@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Events\InventoryUpdated;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class InventoryController extends Controller
 {
@@ -13,6 +15,7 @@ class InventoryController extends Controller
     public function index()
     {
         $inventory = Inventory::all();
+        confirmDelete();
 
         return view('inventory.index', [
             'title' => 'Inventory',
@@ -64,7 +67,7 @@ class InventoryController extends Controller
     /**
      * Update the specified inventory item in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,string $id)
     {
         $inventory = Inventory::findOrFail($id);
 
@@ -78,17 +81,20 @@ class InventoryController extends Controller
 
         event(new InventoryUpdated($inventory));
 
+        Alert::success('Berhasil Diubah', 'Data Berhasil Diubah.');
+
         return redirect('/inventory');
     }
 
     /**
      * Remove the specified inventory item from storage.
      */
-    public function destroy($id)
+    public function destroy(string $id)
     {
         $inventory = Inventory::findOrFail($id);
         $inventory->delete();
 
+        Alert::success('Berhasil Dihapus', 'Data Berhasil Dihapus.');
         return redirect('/inventory');
     }
 }

@@ -55,6 +55,8 @@
     @include('partials.navbar')
 
     @yield('container')
+    @include('sweetalert::alert')
+    @stack('scripts')
 
     @include('partials.footer')
 

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BarangkeluarRequest;
-use App\Exports\BarangkeluarExport; // Pastikan Anda telah mengimpor BarangkeluarExport
+use App\Models\Inventory;
 use App\Models\Barangkeluar;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Inventory;
 use Illuminate\Support\Facades\DB;
+use App\Exports\BarangkeluarExport;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\BarangkeluarRequest;
 
 class BarangkeluarController extends Controller
 {
@@ -19,6 +21,7 @@ class BarangkeluarController extends Controller
     {
         $user = Auth::user(); // Get the currently authenticated user
         $inventory = Barangkeluar::where('user_id', $user->id)->get(); // Fetch inventory data for the current user
+        confirmDelete();
 
         return view('barangkeluar.index-keluar', [
             'title' => 'Barang Keluar',
@@ -41,6 +44,11 @@ class BarangkeluarController extends Controller
      */
     public function store(BarangkeluarRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            'jumlah_terjual' => $inventory->jumlah_terjual,
+        ]);
+
+
         $user = Auth::user(); // Get the currently authenticated user
 
         Barangkeluar::create([
@@ -50,8 +58,11 @@ class BarangkeluarController extends Controller
             'harga_jual' => $request->harga_jual,
             'tanggal_beli' => $request->tanggal_beli,
             'jumlah_terjual' => $request->jumlah_terjual,
-            
+
+
         ]);
+
+
         //  // Update entri Inventory
         $inventory = Inventory::where('nama_barang', $request->nama_barang)->first();
 
@@ -61,6 +72,7 @@ class BarangkeluarController extends Controller
             $inventory->save();
         }
 
+        Alert::success('Berhasil Ditambahkan', 'Data Berhasil Ditambahkan.');
         return redirect('/barangkeluar');
     }
 
@@ -105,6 +117,8 @@ class BarangkeluarController extends Controller
         }
 
         $selected->delete();
+
+        Alert::success('Berhasil Dihapus', 'Data Berhasil Dihapus.');
         return redirect('/barangkeluar');
     }
 }
