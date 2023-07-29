@@ -32,12 +32,12 @@
                                 <div class="form-group mt-3 mb-3">
                                     <label for="harga_jual">Harga Jual</label>
                                     <input type="number" class="form-control" name="harga_jual" id="harga_jual"
-                                        placeholder="0" min="0" step="1000" required>
+                                        placeholder="0" min="0" required>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="tanggal_beli">Tanggal Beli</label>
-                                    <input type="number" class="form-control" name="tanggal_beli" id="tanggal_beli"
-                                        placeholder="0" min="0" required>
+                                    <input type="text" class="form-control" name="tanggal_beli" id="tanggal_beli"
+                                        placeholder="yy/mm/dd" pattern="\d{4}/\d{2}/\d{2}"  required>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="jumlah_terjual">Jumlah Terjual</label>
@@ -46,10 +46,11 @@
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="Invoice" class="form-label">Nota Penjualan(Invoice)</label>
-                                    <input type="file" class="form-control" name="Invoice" id="Invoice">
+                                    <input type="file" class="form-control" name="Invoice" id="Invoice" required>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success">Simpan Data</button>
+                                    <a href="{{ route('barangkeluar') }}" class="btn btn-secondary">Cancel</a>
                                 </div>
                             </form>
                         </div>

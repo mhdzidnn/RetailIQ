@@ -14,10 +14,10 @@
                             <a href="{{ route('create-keluar') }}" class="btn-create"><i class="bi bi-plus-square"></i>
                                 Input Barang Keluar
                             </a>
+
                             <a href="{{ route('barangkeluar.exportExcel') }}" class="btn btn-outline-success">
                                 <i class="bi bi-download me-1"></i> to Excel
                             </a>
-                            <li class="list-inline-item">
                             <a href="{{ route('barangkeluar.exportPdf') }}" class="btn btn-outline-danger">
                                 <i class="bi bi-download me-1"></i> to PDF
                             </a>
@@ -28,13 +28,13 @@
                             <table id="BarangkeluarTable" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Nama Customer</th>
-                                        <th scope="col">Nama Barang</th>
-                                        <th scope="col">Harga Jual</th>
-                                        <th scope="col">Tanggal Beli</th>
-                                        <th scope="col">Jumlah Barang Keluar</th>
-                                        <th scope="col">Aksi</th>
+                                        <th scope="col" style="width: 100px;">ID</th>
+                                        <th scope="col" style="width: 400px;">Nama Customer</th>
+                                        <th scope="col" style="width: 400px;">Nama Barang</th>
+                                        <th scope="col" style="width: 400px;">Harga Jual</th>
+                                        <th scope="col" style="width: 400px;">Tanggal Beli</th>
+                                        <th scope="col" style="width: 400px;">Jumlah Barang Keluar</th>
+                                        <th scope="col" style="width: 400px;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -47,6 +47,8 @@
                                             <td>{{ $item->tanggal_beli }}</td>
                                             <td>{{ $item->jumlah_terjual }}</td>
                                             <td>
+                                                <a href="{{ route('show-keluar', ['id' => $item->id]) }}"
+                                                    class="btn-edit">Show</a>
                                                 <a href="{{ route('delete-keluar', ['id' => $item->id]) }}"
                                                     class="btn-delete">Delete</a>
                                                 {{-- <button class="btn btn-danger btn-sm hapus" data-toggle="modal"

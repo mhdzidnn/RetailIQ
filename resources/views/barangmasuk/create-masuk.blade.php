@@ -27,7 +27,7 @@
                             <div class="form-group mt-3 mb-3">
                                 <label for="harga_awal">Harga Awal</label>
                                 <input type="number" class="form-control" name="harga_awal" id="harga_awal"
-                                    placeholder="0" min="0" step="1000" required>
+                                    placeholder="0" min="0" required>
                             </div>
                             <div class="form-group mt-3 mb-3">
                                 <label for="jumlah">Jumlah Barang Masuk</label>
@@ -40,6 +40,7 @@
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">Simpan Data</button>
+                                <a href="{{ route('barangmasuk') }}" class="btn btn-secondary">Cancel</a>
                             </div>
                         </form>
                     </div>

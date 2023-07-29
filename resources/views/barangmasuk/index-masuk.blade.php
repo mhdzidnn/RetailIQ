@@ -27,11 +27,11 @@
                             <table id="BarangmasukTable" class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Nama Barang</th>
-                                        <th scope="col">Harga Awal</th>
-                                        <th scope="col">Jumlah Barang Masuk</th>
-                                        <th scope="col">Aksi</th>
+                                        <th scope="col" style="width: 100px;">ID</th>
+                                        <th scope="col" style="width: 400px;">Nama Barang</th>
+                                        <th scope="col" style="width: 400px;">Harga Awal</th>
+                                        <th scope="col" style="width: 400px;">Jumlah Barang Masuk</th>
+                                        <th scope="col" style="width: 400px;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -100,6 +100,7 @@
 <script>
     $(document).ready(function() {
         $('#BarangmasukTable').DataTable();
+
     });
 </script>
 

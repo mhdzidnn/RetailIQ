@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-    <h1>EExport PDF</h1>
+    <h1>List Data Barang Keluar</h1>
     <table class="table table-bordered">
         <thead>
             <tr>

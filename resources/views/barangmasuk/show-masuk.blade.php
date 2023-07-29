@@ -38,6 +38,7 @@
                                     <h5>Tidak ada</h5>
                                 @endif
                             </div>
+                            <a href="{{ route('barangmasuk') }}" class="btn btn-secondary">Back</a>
                             <div class="form-group">
                                 {{-- <a href="{{ route('edit', ['id' => $barangmasuk->id]) }}" class="btn btn-primary">Edit</a>
                                 <a href="{{ route('delete', ['id' => $barangmasuk->id]) }}" class="btn btn-danger"

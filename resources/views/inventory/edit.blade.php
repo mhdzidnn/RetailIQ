@@ -38,6 +38,7 @@
                                 value="{{ $inventory->jumlah_terjual }}" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{{ route('inventory') }}" class="btn btn-secondary">Cancel</a>
                     </form>
                 </div>
             </div>

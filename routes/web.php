@@ -58,6 +58,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store-keluar', [BarangkeluarController::class, 'store'])->name('store-keluar');
         Route::get('/edit-keluar/{id}', [BarangkeluarController::class, 'edit'])->name('edit-keluar');
         Route::post('/update-keluar/{id}', [BarangkeluarController::class, 'update'])->name('update-keluar');
+        Route::get('/show-keluar/{id}', [BarangkeluarController::class, 'show'])->name('show-keluar');
         Route::get('/delete-keluar/{id}', [BarangkeluarController::class, 'destroy'])->name('delete-keluar');
         Route::get('exportExcel', [BarangkeluarController::class, 'exportExcel'])->name('barangkeluar.exportExcel');
         Route::get('exportPdf', [BarangkeluarController::class, 'exportPdf'])->name('barangkeluar.exportPdf');
