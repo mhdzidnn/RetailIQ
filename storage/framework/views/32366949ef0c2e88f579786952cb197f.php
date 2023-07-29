@@ -1,4 +1,34 @@
 <?php $__env->startSection('container'); ?>
+
+
+<?php $__env->startPush('scripts'); ?>
+    <script type="module">
+        $(document).ready(function() {
+
+            $(".datatable").on("click", ".btn-delete", function (e) {
+                e.preventDefault();
+
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+
+                Swal.fire({
+                    title: "Yakin Ingin Menghapus\n" + name + "?",
+                    text: "Data Akan Terhapus!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "bg-danger",
+                    confirmButtonText: "Yakin!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+<?php $__env->stopPush(); ?>
+
+
 <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
             <div class="section-title mt-5">
@@ -23,7 +53,7 @@
                         </div>
                         <div class="col-lg-12 mt-lg-0 d-flex align-items-stretch mx-auto" data-aos="fade-up"
                             data-aos-delay="200">
-                            <table id="BarangkeluarTable" class="table table-striped">
+                            <table id="BarangkeluarTable" class="table table-striped datatable">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width: 100px;">ID</th>
@@ -45,8 +75,6 @@
                                             <td><?php echo e($item->tanggal_beli); ?></td>
                                             <td><?php echo e($item->jumlah_terjual); ?></td>
                                             <td>
-                                                <a href="<?php echo e(route('show-keluar', ['id' => $item->id])); ?>"
-                                                    class="btn-edit">Show</a>
                                                 <a href="<?php echo e(route('delete-keluar', ['id' => $item->id])); ?>"
                                                     class="btn-delete">Delete</a>
                                                 
@@ -66,22 +94,10 @@
 
 
 
-    <?php $__env->startPush('scripts'); ?>
-        <script>
-            $(document).ready(function() {
-                $('#barangkeluarTable').DataTable();
-            });
-        </script>
-    <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
 <?php echo app('Illuminate\Foundation\Vite')('resources/js/app.js'); ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('#BarangkeluarTable').DataTable();
-    });
-</script>
 
 <?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\Dell\RetailIQ\resources\views/barangkeluar/index-keluar.blade.php ENDPATH**/ ?>

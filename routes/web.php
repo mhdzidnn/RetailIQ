@@ -46,7 +46,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/create-masuk', [BarangmasukController::class, 'create'])->name('create');
         Route::post('/store-masuk', [BarangmasukController::class, 'store'])->name('store');
         Route::get('/show-masuk/{id}', [BarangmasukController::class, 'show'])->name('show');
-        Route::get('/delete-masuk/{id}', [BarangmasukController::class, 'destroy'])->name('delete');
+        Route::delete('/delete-masuk/{id}', [BarangmasukController::class, 'destroy'])->name('barangmasuk.destroy');
+        // Route::get('/delete-masuk/{id}', [BarangmasukController::class, 'destroy'])->name('delete');
         Route::get('exportExcel', [BarangmasukController::class, 'exportExcel'])->name('barangmasuk.exportExcel');
         Route::get('exportPdf', [BarangmasukController::class, 'exportPdf'])->name('barangmasuk.exportPdf');
     });
@@ -58,7 +59,6 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/store-keluar', [BarangkeluarController::class, 'store'])->name('store-keluar');
         Route::get('/edit-keluar/{id}', [BarangkeluarController::class, 'edit'])->name('edit-keluar');
         Route::post('/update-keluar/{id}', [BarangkeluarController::class, 'update'])->name('update-keluar');
-        Route::get('/show-keluar/{id}', [BarangkeluarController::class, 'show'])->name('show-keluar');
         Route::get('/delete-keluar/{id}', [BarangkeluarController::class, 'destroy'])->name('delete-keluar');
         Route::get('exportExcel', [BarangkeluarController::class, 'exportExcel'])->name('barangkeluar.exportExcel');
         Route::get('exportPdf', [BarangkeluarController::class, 'exportPdf'])->name('barangkeluar.exportPdf');
@@ -76,7 +76,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::prefix('inventory')->group(function () {
         Route::get('/', [InventoryController::class, 'index'])->name('inventory');
-        Route::delete('/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
+        Route::delete('/delete-inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
         Route::get('inventory/edit/{id}', [InventoryController::class, 'edit'])->name('inventory.edit');
         Route::put('inventory/update/{id}', [InventoryController::class, 'update'])->name('inventory.update');
 

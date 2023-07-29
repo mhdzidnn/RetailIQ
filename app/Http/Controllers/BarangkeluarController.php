@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BarangkeluarRequest;
+use App\Exports\BarangkeluarExport;
 use App\Models\Barangkeluar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Inventory;
-use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\BarangkeluarExport;
 use PDF;
 
 
@@ -23,6 +25,7 @@ class BarangkeluarController extends Controller
     {
         $user = Auth::user(); // Get the currently authenticated user
         $inventory = Barangkeluar::where('user_id', $user->id)->get(); // Fetch inventory data for the current user
+        confirmDelete();
 
         return view('barangkeluar.index-keluar', [
             'title' => 'Barang Keluar',
@@ -47,6 +50,21 @@ class BarangkeluarController extends Controller
     {
         $user = Auth::user(); // Get the currently authenticated user
 
+        // Ambil data inventory terkait untuk user saat ini berdasarkan 'nama_barang'
+        $inventory = Inventory::where('nama_barang', $request->nama_barang)
+                                ->where('user_id', $user->id)
+                                ->first();
+
+        // Validasi input 'jumlah_terjual' terhadap data 'jumlah_terjual' dalam $inventory
+        $validator = Validator::make($request->all(), [
+            'jumlah_terjual' => 'required|numeric|min:1|max:' . ($inventory ? $inventory->jumlah_terjual : 0),
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
         // Handle file upload (optional, if you have a file to upload)
         $originalFilename = null;
         $encryptedFilename = null;
@@ -65,10 +83,10 @@ class BarangkeluarController extends Controller
             'harga_jual' => $request->harga_jual,
             'tanggal_beli' => $request->tanggal_beli,
             'jumlah_terjual' => $request->jumlah_terjual,
-            'original_filename' => $originalFilename,
-            'encrypted_filename' => $encryptedFilename,
 
         ]);
+
+
         //  // Update entri Inventory
         $inventory = Inventory::where('nama_barang', $request->nama_barang)->first();
 
@@ -79,6 +97,7 @@ class BarangkeluarController extends Controller
             $inventory->save();
         }
 
+        Alert::success('Berhasil Ditambahkan', 'Data Berhasil Ditambahkan.');
         return redirect('/barangkeluar');
     }
 
@@ -128,6 +147,8 @@ class BarangkeluarController extends Controller
         }
 
         $selected->delete();
+
+        Alert::success('Berhasil Dihapus', 'Data Berhasil Dihapus.');
         return redirect('/barangkeluar');
     }
 

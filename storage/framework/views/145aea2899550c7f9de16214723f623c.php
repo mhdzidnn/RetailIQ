@@ -1,4 +1,33 @@
 <?php $__env->startSection('container'); ?>
+
+<?php $__env->startPush('scripts'); ?>
+    <script type="module">
+        $(document).ready(function() {
+
+            $(".datatable").on("click", ".btn-delete", function (e) {
+                e.preventDefault();
+
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+
+                Swal.fire({
+                    title: "Yakin Ingin Menghapus\n" + name + "?",
+                    text: "Data Akan Terhapus!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "bg-danger",
+                    confirmButtonText: "Yakin!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+<?php $__env->stopPush(); ?>
+
+
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
             <div class="section-title mt-5">
@@ -22,7 +51,7 @@
                         </div>
                         <div class="col-lg-12 mt-lg-0 d-flex align-items-stretch mx-auto" data-aos="fade-up"
                             data-aos-delay="200">
-                            <table id="BarangmasukTable" class="table table-striped">
+                            <table id="BarangmasukTable" class="table table-striped datatable">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width: 100px;">ID</th>
@@ -40,13 +69,21 @@
                                             <td>Rp<?php echo e(number_format($item->harga_awal, 0, ',', '.')); ?></td>
                                             <td><?php echo e($item->jumlah); ?></td>
                                             <td>
-
+                                                <div class="d-flex">
                                                 <a href="<?php echo e(route('show', ['id' => $item->id])); ?>"
                                                     class="btn-edit">Show</a>
-                                                <a href="<?php echo e(route('delete', ['id' => $item->id])); ?>"
-                                                    class="btn-delete">Delete</a>
+                                                <form action="<?php echo e(route('barangmasuk.destroy', ['id' => $item->id])); ?>" method="POST">
+                                                        <?php echo csrf_field(); ?>
+                                                        <?php echo method_field('delete'); ?>
+                                                        <button type="submit" class="btn-delete" data-name="<?php echo e($item->nama_barang); ?>">
+                                                            <i class="bi-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 
-                                            </td>
+                                                
+                                                </div>
+                                                </td>
+                                        </tr>
                                             
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -66,7 +103,6 @@
 <script>
     $(document).ready(function() {
         $('#BarangmasukTable').DataTable();
-
     });
 </script>
 

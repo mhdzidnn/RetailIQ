@@ -1,6 +1,36 @@
 @extends('layouts.main')
 
 @section('container')
+
+
+@push('scripts')
+    <script type="module">
+        $(document).ready(function() {
+
+            $(".datatable").on("click", ".btn-delete", function (e) {
+                e.preventDefault();
+
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+
+                Swal.fire({
+                    title: "Yakin Ingin Menghapus\n" + name + "?",
+                    text: "Data Akan Terhapus!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "bg-danger",
+                    confirmButtonText: "Yakin!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
+
+
 <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
             <div class="section-title mt-5">
@@ -25,7 +55,7 @@
                         </div>
                         <div class="col-lg-12 mt-lg-0 d-flex align-items-stretch mx-auto" data-aos="fade-up"
                             data-aos-delay="200">
-                            <table id="BarangkeluarTable" class="table table-striped">
+                            <table id="BarangkeluarTable" class="table table-striped datatable">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width: 100px;">ID</th>
@@ -47,8 +77,6 @@
                                             <td>{{ $item->tanggal_beli }}</td>
                                             <td>{{ $item->jumlah_terjual }}</td>
                                             <td>
-                                                <a href="{{ route('show-keluar', ['id' => $item->id]) }}"
-                                                    class="btn-edit">Show</a>
                                                 <a href="{{ route('delete-keluar', ['id' => $item->id]) }}"
                                                     class="btn-delete">Delete</a>
                                                 {{-- <button class="btn btn-danger btn-sm hapus" data-toggle="modal"
@@ -100,20 +128,8 @@
 
 
 
-    @push('scripts')
-        <script>
-            $(document).ready(function() {
-                $('#barangkeluarTable').DataTable();
-            });
-        </script>
-    @endpush
 @endsection
 
 @vite('resources/js/app.js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-    $(document).ready(function() {
-        $('#BarangkeluarTable').DataTable();
-    });
-</script>

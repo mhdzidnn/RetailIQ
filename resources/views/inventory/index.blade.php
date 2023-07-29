@@ -1,6 +1,35 @@
 @extends('layouts.main')
 
 @section('container')
+
+@push('scripts')
+    <script type="module">
+        $(document).ready(function() {
+
+            $(".datatable").on("click", ".btn-delete", function (e) {
+                e.preventDefault();
+
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+
+                Swal.fire({
+                    title: "Yakin Ingin Menghapus\n" + name + "?",
+                    text: "Data Akan Terhapus!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "bg-danger",
+                    confirmButtonText: "Yakin!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
+
+
     <section id="inventory" class="inventory">
         <div class="container" data-aos="fade-up">
             <div class="section-title mt-5">
@@ -10,7 +39,7 @@
             <div class="row">
                 <div class="col-lg-12 mt-3 mx-auto" data-aos="fade-up" data-aos-delay="200">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
+                        <table id="InventoryTable" class="table table-striped table-bordered datatable">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">ID</th>
@@ -32,13 +61,16 @@
                                         <td>{{ $item->stok }}</td>
                                         <td>{{ $item->jumlah_terjual }}</td>
                                         <td>
+
                                             <div class="d-flex">
-                                                <form action="{{ route('inventory.destroy', ['id' => $item->id]) }}"
-                                                    method="POST" class="mr-1">
-                                                    @method('DELETE')
+                                                <form action="{{ route('inventory.destroy', ['id' => $item->id]) }}" method="POST">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                    @method('delete')
+                                                    <button type="submit" class="btn-delete btn btn-danger" data-name="{{ $item->nama_barang}}">
+                                                        <i class="bi-trash3-fill"></i>
+                                                    </button>
                                                 </form>
+
                                                 <a href="{{ route('inventory.edit', ['id' => $item->id]) }}"
                                                     class="btn btn-warning btn-sm">Edit</a>
                                             </div>
@@ -53,3 +85,6 @@
         </div>
     </section>
 @endsection
+
+@vite('resources/js/app.js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -21,7 +21,7 @@ class Barangkeluar extends Model
         'nama_barang',
         'harga_jual',
         'tanggal_beli',
-        'jumlah_terjual'
+        'jumlah_terjual',
     ];
 
     public function user(): BelongsTo
