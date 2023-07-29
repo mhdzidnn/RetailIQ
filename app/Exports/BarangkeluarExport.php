@@ -18,7 +18,6 @@ class BarangkeluarExport implements FromCollection, WithStyles, ShouldAutoSize
 
     public function collection()
     {
-        // Ganti ini dengan logika Anda untuk mengambil data barang keluar
         return Barangkeluar::all();
     }
 }
