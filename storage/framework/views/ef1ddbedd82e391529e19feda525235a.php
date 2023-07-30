@@ -59,18 +59,18 @@
                                         <td><?php echo e($item->stok); ?></td>
                                         <td><?php echo e($item->jumlah_terjual); ?></td>
                                         <td>
-
                                             <div class="d-flex">
-                                                <form action="<?php echo e(route('inventory.destroy', ['id' => $item->id])); ?>" method="POST">
+                                                <form action="<?php echo e(route('inventory.destroy', ['id' => $item->id])); ?>"
+                                                    method="POST" class="mr-1">
+                                                    <?php echo method_field('DELETE'); ?>
                                                     <?php echo csrf_field(); ?>
-                                                    <?php echo method_field('delete'); ?>
-                                                    <button type="submit" class="btn-delete btn btn-danger" data-name="<?php echo e($item->nama_barang); ?>">
-                                                        <i class="bi-trash3-fill"></i>
+                                                    <button type="submit" class="btn btn-danger btn-delete" data-name="<?php echo e($item->nama_barang); ?>">
+                                                        <i class="bi-trash"></i>
                                                     </button>
+                                                    <a href="<?php echo e(route('inventory.edit', ['id' => $item->id])); ?>" class="btn btn-warning">
+                                                        <i class="bi-pencil"></i></a>
                                                 </form>
 
-                                                <a href="<?php echo e(route('inventory.edit', ['id' => $item->id])); ?>"
-                                                    class="btn btn-warning btn-sm">Edit</a>
                                             </div>
                                         </td>
                                     </tr>

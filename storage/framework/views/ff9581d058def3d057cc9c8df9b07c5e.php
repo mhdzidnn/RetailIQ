@@ -110,6 +110,8 @@
 
 <!-- Template Main JS File -->
 <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
+<?php echo app('Illuminate\Foundation\Vite')('resources/js/app.js'); ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </html>
 <?php /**PATH C:\Users\Dell\RetailIQ\resources\views/layouts/main.blade.php ENDPATH**/ ?>

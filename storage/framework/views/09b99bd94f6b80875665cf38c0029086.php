@@ -31,7 +31,7 @@
                         <!-- Name input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="name">Name</label>
-                            <input type="text" name="name" id="name" class="form-control form-control-lg"
+                            <input type="text" name="name" value="<?php echo e(old('name')); ?>" id="name" class="form-control form-control-lg"
                                 value="<?php echo e(old('name')); ?>" <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -55,7 +55,7 @@ unset($__errorArgs, $__bag); ?>
                         <!-- Email input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="email">Email address</label>
-                            <input type="email" name="email" id="email" class="form-control form-control-lg"
+                            <input type="email" name="email" value="<?php echo e(old('email')); ?>" id="email" class="form-control form-control-lg"
                                 value="<?php echo e(old('email')); ?>" <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -79,7 +79,7 @@ unset($__errorArgs, $__bag); ?>
                         <!-- Password input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control form-control-lg"
+                            <input type="password" name="password" value="<?php echo e(old('password')); ?>" id="password" class="form-control form-control-lg"
                                 required />
                             <?php $__errorArgs = ['password'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -96,7 +96,7 @@ unset($__errorArgs, $__bag); ?>
                         <!-- Confirm Password input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="password_confirmation">Confirm Password</label>
-                            <input type="password" name="password_confirmation" id="password_confirmation"
+                            <input type="password" name="password_confirmation" value="<?php echo e(old('password_confirmation')); ?>" id="password_confirmation"
                                 class="form-control form-control-lg" required />
                             <?php $__errorArgs = ['password_confirmation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

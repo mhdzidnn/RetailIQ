@@ -31,7 +31,7 @@
                         <!-- Email input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="email">Email address</label>
-                            <input type="email" name="email" id="email" class="form-control form-control-lg" value="<?php echo e(old('email')); ?>" <?php $__errorArgs = ['email'];
+                            <input type="email" name="email" value="<?php echo e(old('email')); ?>" id="email" class="form-control form-control-lg" value="<?php echo e(old('email')); ?>" <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -57,7 +57,7 @@ unset($__errorArgs, $__bag); ?>
                         <!-- Password input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control form-control-lg" />
+                            <input type="password" name="password" value="<?php echo e(old('password')); ?>" id="password" class="form-control form-control-lg" />
                         </div>
 
                         <!-- Submit button -->

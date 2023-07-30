@@ -14,37 +14,124 @@
                             <form action="<?php echo e(route('store-keluar')); ?>" method="post" enctype="multipart/form-data" class="php-email-form">
                                 <?php echo csrf_field(); ?>
                                 <div class="form-group mt-3 mb-3">
-                                    <label for="nama_barang">Nama Customer</label>
-                                    <input type="text" name="nama_customer" class="form-control" id="nama_customer"
+                                    <label for="nama_customer">Nama Customer</label>
+                                    <input type="text" name="nama_customer" value="<?php echo e(old('nama_customer')); ?>" class="form-control <?php $__errorArgs = ['nama_customer'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" id="nama_customer"
                                         placeholder="Masukkan nama customer" required>
+                                    <?php $__errorArgs = ['nama_customer'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback"><?php echo e($message); ?></span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="nama_barang">Nama Barang</label>
-                                    <select class="form-control" name="nama_barang" id="nama_barang" required>
+                                    <select class="form-control <?php $__errorArgs = ['nama_barang'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="nama_barang" id="nama_barang" value="<?php echo e(old('nama_barang')); ?>" required>
                                         <option disabled selected>-- Pilih Kategori --</option>
                                         <option value="Air Galon Aqua">Air Galon Aqua</option>
                                         <option value="Air Galon Sanford">Air Galon Sanford</option>
                                         <option value="Air Galon Mindy">Air Galon Mindy</option>
                                     </select>
+                                    <?php $__errorArgs = ['nama_barang'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback"><?php echo e($message); ?></span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
+
                                 <div class="form-group mt-3 mb-3">
                                     <label for="harga_jual">Harga Jual</label>
-                                    <input type="number" class="form-control" name="harga_jual" id="harga_jual"
+                                    <input type="number" class="form-control <?php $__errorArgs = ['harga_jual'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="harga_jual" value="<?php echo e(old('harga_jual')); ?>" id="harga_jual"
                                         placeholder="0" min="0" required>
+                                    <?php $__errorArgs = ['harga_jual'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback"><?php echo e($message); ?></span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
+
                                 <div class="form-group mt-3 mb-3">
                                     <label for="tanggal_beli">Tanggal Beli</label>
-                                    <input type="number" class="form-control" name="tanggal_beli" id="tanggal_beli"
-                                        placeholder="0" min="0" required>
+                                    <input type="text" class="form-control <?php $__errorArgs = ['tanggal_beli'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="tanggal_beli" value="<?php echo e(old('tanggal_beli')); ?>" id="tanggal_beli"
+                                        placeholder="yy/mm/dd" pattern="\d{4}/\d{2}/\d{2}" required>
+                                    <?php $__errorArgs = ['tanggal_beli'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback"><?php echo e($message); ?></span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div class="form-group mt-3 mb-3">
                                     <label for="jumlah_terjual">Jumlah Terjual</label>
-                                    <input type="number" class="form-control" name="jumlah_terjual" id="jumlah_terjual"
+                                    <input type="number" class="form-control <?php $__errorArgs = ['jumlah_terjual'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="jumlah_terjual" value="<?php echo e(old('jumlah_terjual')); ?>" id="jumlah_terjual"
                                         placeholder="0" min="0" required>
+                                    <?php $__errorArgs = ['jumlah_terjual'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                        <span class="invalid-feedback"><?php echo e($message); ?></span>
+                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label for="Invoice" class="form-label">Nota Penjualan(Invoice)</label>
-                                    <input type="file" class="form-control" name="Invoice" id="Invoice" required>
+                                    <input type="file" class="form-control" name="Invoice" id="Invoice" value="<?php echo e(old('Invoice')); ?>" required>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success">Simpan Data</button>

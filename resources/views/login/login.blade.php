@@ -31,7 +31,7 @@
                         <!-- Email input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="email">Email address</label>
-                            <input type="email" name="email" id="email" class="form-control form-control-lg" value="{{ old('email') }}" @error('email') is-invalid @enderror autofocus required/>
+                            <input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control form-control-lg" value="{{ old('email') }}" @error('email') is-invalid @enderror autofocus required/>
                             @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -42,7 +42,7 @@
                         <!-- Password input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control form-control-lg" />
+                            <input type="password" name="password" value="{{ old('password') }}" id="password" class="form-control form-control-lg" />
                         </div>
 
                         <!-- Submit button -->

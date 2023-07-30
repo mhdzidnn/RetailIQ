@@ -24,16 +24,7 @@ class BarangmasukRequest extends FormRequest
     public function messages()
     {
         return [
-            'nama_barang.required' => 'Nama barang harus diisi.',
-            'harga_awal.required' => 'Harga awal harus diisi.',
-            'harga_awal.numeric' => 'Harga awal harus berupa angka.',
-            'harga_awal.min' => 'Harga awal harus lebih besar atau sama dengan 0.',
-            'jumlah.required' => 'Jumlah barang masuk harus diisi.',
-            'jumlah.numeric' => 'Jumlah barang masuk harus berupa angka.',
-            'jumlah.min' => 'Jumlah barang masuk harus lebih besar atau sama dengan 0.',
-            'Invoice.required' => 'Nota pembelian (Invoice) harus diunggah.',
-            'Invoice.mimes' => 'Nota pembelian (Invoice) harus berupa file jpeg, png, atau pdf.',
-            'Invoice.max' => 'Ukuran nota pembelian (Invoice) maksimal 2MB.',
+           
         ];
     }
 }
