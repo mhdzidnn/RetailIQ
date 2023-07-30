@@ -48,6 +48,7 @@
                                     <h5>Tidak ada</h5>
                                 @endif
                             </div>
+                            <a href="{{ route('barangkeluar') }}" class="btn btn-secondary">Back</a>
                             <div class="form-group">
                                 {{-- <a href="{{ route('edit-keluar', ['id' => $barangkeluar->id]) }}" class="btn btn-primary">Edit</a>
                                 <a href="{{ route('delete-keluar', ['id' => $barangkeluar->id]) }}" class="btn btn-danger"

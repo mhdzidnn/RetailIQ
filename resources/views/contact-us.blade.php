@@ -18,25 +18,25 @@
               <div class="row">
                 <div class="form-group">
                   <label for="nama">Nama</label>
-                  <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan nama" required>
+                  <input type="text" name="nama" value="{{ old('nama') }}" class="form-control" id="nama" placeholder="Masukkan nama" required>
                 </div>
               </div>
               <div class="form-group mt-3 mb-3">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Masukkan email" required>
+                <input type="email" class="form-control" name="email" value="{{ old('email') }}" id="email" placeholder="Masukkan email" required>
               </div>
               <label for="perihal">Perihal</label>
-              <select class="form-select rounded-0 mb-3" aria-label="Default select example" name="perihal" required>
+              <select class="form-select rounded-0 mb-3" aria-label="Default select example" name="perihal" value="{{ old('perihal') }}" required>
                 <option value="Pelayanan Pelanggan" selected>Pelayanan Pelanggan</option>
                 <option value="Umpan Balik">Umpan Balik</option>
               </select>
               <div class="form-group mt-3 mb-3">
                 <label for="judul">Judul</label>
-                <input type="text" class="form-control" name="judul" id="judul" placeholder="Masukkan judul" required>
+                <input type="text" class="form-control" name="judul" value="{{ old('judul') }}" id="judul" placeholder="Masukkan judul" required>
               </div>
               <div class="form-group mt-3 mb-3">
                 <label for="pesan">Pesan</label>
-                <textarea class="form-control" name="pesan" rows="10" placeholder="Tulis pesan" required></textarea>
+                <textarea class="form-control" name="pesan" value="{{ old('pesan') }}" rows="10" placeholder="Tulis pesan" required></textarea>
               </div>
               <div class="my-3">
                 <div class="loading">Loading</div>
@@ -45,7 +45,7 @@
               </div>
               <div class="text-center"><button type="submit">Submit</button></div>
             </form>
-          </div>            
+          </div>
         </div>
       </div>
 

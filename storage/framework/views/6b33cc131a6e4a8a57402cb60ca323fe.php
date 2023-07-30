@@ -17,29 +17,70 @@
                             <?php echo csrf_field(); ?>
                             <div class="form-group mt-3 mb-3">
                                 <label for="nama_barang">Nama Barang</label>
-                                <select class="form-control" name="nama_barang" id="nama_barang" required>
+                                <select class="form-control" name="nama_barang" value="<?php echo e(old('nama_barang')); ?>" id="nama_barang" required>
                                     <option disabled selected>-- Pilih Kategori --</option>
                                     <option value="Air Galon Aqua">Air Galon Aqua</option>
                                     <option value="Air Galon Sanford">Air Galon Sanford</option>
                                     <option value="Air Galon Mindy">Air Galon Mindy</option>
                                 </select>
+                                <?php $__errorArgs = ['nama_barang'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="form-group mt-3 mb-3">
                                 <label for="harga_awal">Harga Awal</label>
-                                <input type="number" class="form-control" name="harga_awal" id="harga_awal"
-                                    placeholder="0" min="0" step="1000" required>
+                                <input type="number" class="form-control" name="harga_awal" value="<?php echo e(old('harga_awal')); ?>" id="harga_awal"
+                                    placeholder="0" min="0" required>
+                                <?php $__errorArgs = ['harga_awal'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="form-group mt-3 mb-3">
                                 <label for="jumlah">Jumlah Barang Masuk</label>
-                                <input type="number" class="form-control" name="jumlah" id="jumlah"
+                                <input type="number" class="form-control" name="jumlah" value="<?php echo e(old('jumlah')); ?>" id="jumlah"
                                     placeholder="0" min="0" required>
+                                <?php $__errorArgs = ['jumlah'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="invoice" class="form-label">Nota Pembelian (Invoice)</label>
-                                <input type="file" class="form-control" name="Invoice" id="Invoice" required>
+                                <input type="file" class="form-control" name="Invoice" value="<?php echo e(old('Invoice')); ?>" id="Invoice" required>
+                                <?php $__errorArgs = ['invoice'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="invalid-feedback"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success">Simpan Data</button>
+                                <a href="<?php echo e(route('barangmasuk')); ?>" class="btn btn-secondary">Cancel</a>
                             </div>
                         </form>
                     </div>

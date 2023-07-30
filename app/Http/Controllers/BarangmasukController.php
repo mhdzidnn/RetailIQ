@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\BarangmasukRequest;
+use Illuminate\Http\Request;
+use DataTables;
 
 
 class BarangmasukController extends Controller
@@ -166,6 +168,36 @@ class BarangmasukController extends Controller
         $pdf = PDF::loadView('barangmasuk.export_pdf', compact('barangmasuk'));
         return $pdf->download('barangmasuk.pdf');
     }
+
+    public function getData(Request $request)
+    {
+        $user = Auth::user(); // Get the currently authenticated user
+        $inventory = Barangmasuk::where('user_id', $user->id)->with('position');
+
+        if ($request->ajax()) {
+            return datatables()->of($inventory)
+                ->addIndexColumn()
+                ->addColumn('actions', function ($row) {
+                    // Kolom ini digunakan untuk menambahkan tombol aksi
+                    $btn = '<a href="' . route('show', ['id' => $row->id]) . '" class="btn btn-warning">
+                                <i class="bi bi-eye"></i>
+                            </a>';
+                    $btn .= ' <form action="' . route('barangmasuk.destroy', ['id' => $row->id]) . '" method="POST" style="display: inline;">
+                                ' . csrf_field() . '
+                                ' . method_field("DELETE") . '
+                                <button type="submit" class="btn-delete btn btn-danger" data-name="' . $row->nama_barang . '">
+                                    <i class="bi-trash"></i>
+                                </button>
+                            </form>';
+                    return $btn;
+                })
+                ->rawColumns(['actions'])
+                ->toJson();
+        }
+}
+
+
+
 
 
 

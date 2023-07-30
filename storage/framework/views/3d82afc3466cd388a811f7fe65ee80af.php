@@ -36,6 +36,7 @@
                                 value="<?php echo e($inventory->jumlah_terjual); ?>" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="<?php echo e(route('inventory')); ?>" class="btn btn-secondary">Cancel</a>
                     </form>
                 </div>
             </div>

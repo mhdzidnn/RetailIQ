@@ -55,16 +55,63 @@
     <?php echo $__env->make('partials.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->yieldContent('container'); ?>
+    <?php echo $__env->make('sweetalert::alert', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 
     <?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->yieldContent('scripts'); ?>
+
+    <style>
+        .dataTables_filter {
+            float: right;
+        }
+
+        /* Atur margin atas untuk menghindari tumpang tindih dengan tombol Previous */
+        .dataTables_info {
+            margin-top: 2rem;
+        }
+
+        .dataTables_info {
+            float: left;
+        }
+
+        .dataTables_paginate {
+            float: right;
+            margin-top:10px;
+        }
+
+        .dataTables_wrapper {
+            position: relative;
+        }
+
+        .dataTables_length,
+        .dataTables_filter {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .dataTables_info {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .dataTables_paginate {
+            display: inline-block;
+            bottom: 0;
+            right: 0;
+            margin: 0px;
+        }
+    </style>
+
 
 </body>
 
 
 <!-- Template Main JS File -->
 <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
+<?php echo app('Illuminate\Foundation\Vite')('resources/js/app.js'); ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </html>
 <?php /**PATH C:\Users\Dell\RetailIQ\resources\views/layouts/main.blade.php ENDPATH**/ ?>

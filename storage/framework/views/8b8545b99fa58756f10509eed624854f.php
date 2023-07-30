@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-    <h1>Employee List</h1>
+    <h1>List Data Barang Masuk</h1>
     <table class="table table-bordered">
         <thead>
             <tr>

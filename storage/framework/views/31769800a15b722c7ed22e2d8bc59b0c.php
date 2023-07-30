@@ -46,6 +46,7 @@
                                     <h5>Tidak ada</h5>
                                 <?php endif; ?>
                             </div>
+                            <a href="<?php echo e(route('barangkeluar')); ?>" class="btn btn-secondary">Back</a>
                             <div class="form-group">
                                 
                             </div>

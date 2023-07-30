@@ -31,7 +31,7 @@
                         <!-- Name input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="name">Name</label>
-                            <input type="text" name="name" id="name" class="form-control form-control-lg"
+                            <input type="text" name="name" value="{{ old('name') }}" id="name" class="form-control form-control-lg"
                                 value="{{ old('name') }}" @error('name') is-invalid @enderror autofocus required />
                             @error('name')
                                 <div class="text-danger">{{ $message }}</div>
@@ -41,7 +41,7 @@
                         <!-- Email input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="email">Email address</label>
-                            <input type="email" name="email" id="email" class="form-control form-control-lg"
+                            <input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control form-control-lg"
                                 value="{{ old('email') }}" @error('email') is-invalid @enderror required />
                             @error('email')
                                 <div class="text-danger">{{ $message }}</div>
@@ -51,7 +51,7 @@
                         <!-- Password input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control form-control-lg"
+                            <input type="password" name="password" value="{{ old('password') }}" id="password" class="form-control form-control-lg"
                                 required />
                             @error('password')
                                 <span class="text-danger">{{ $message }}</span>
@@ -61,7 +61,7 @@
                         <!-- Confirm Password input -->
                         <div class="form-outline mb-4">
                             <label class="form-label" for="password_confirmation">Confirm Password</label>
-                            <input type="password" name="password_confirmation" id="password_confirmation"
+                            <input type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" id="password_confirmation"
                                 class="form-control form-control-lg" required />
                             @error('password_confirmation')
                                 <span class="text-danger">{{ $message }}</span>

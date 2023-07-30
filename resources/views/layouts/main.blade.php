@@ -62,10 +62,55 @@
 
     @yield('scripts')
 
+    <style>
+        .dataTables_filter {
+            float: right;
+        }
+
+        /* Atur margin atas untuk menghindari tumpang tindih dengan tombol Previous */
+        .dataTables_info {
+            margin-top: 2rem;
+        }
+
+        .dataTables_info {
+            float: left;
+        }
+
+        .dataTables_paginate {
+            float: right;
+            margin-top:10px;
+        }
+
+        .dataTables_wrapper {
+            position: relative;
+        }
+
+        .dataTables_length,
+        .dataTables_filter {
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .dataTables_info {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .dataTables_paginate {
+            display: inline-block;
+            bottom: 0;
+            right: 0;
+            margin: 0px;
+        }
+    </style>
+
+
 </body>
 
 
 <!-- Template Main JS File -->
 <script src="{{ asset('assets/js/main.js') }}"></script>
+@vite('resources/js/app.js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </html>
