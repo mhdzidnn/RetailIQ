@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
         // Route::get('/delete-keluar/{id}', [BarangkeluarController::class, 'destroy'])->name('delete-keluar');
         Route::get('exportExcel', [BarangkeluarController::class, 'exportExcel'])->name('barangkeluar.exportExcel');
         Route::get('exportPdf', [BarangkeluarController::class, 'exportPdf'])->name('barangkeluar.exportPdf');
+        Route::get('/barangkeluar/getData', [BarangkeluarController::class, 'getData'])->name('barangkeluar.getData');
     });
 });
 

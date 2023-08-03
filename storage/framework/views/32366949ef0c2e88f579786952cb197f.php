@@ -1,7 +1,7 @@
 <?php $__env->startSection('container'); ?>
 
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
 
 <?php $__env->startPush('scripts'); ?>
     <script>
@@ -27,7 +27,7 @@
             });
         });
     </script>
-<?php $__env->stopPush(); ?>
+<?php $__env->stopPush(); ?> --}}
 
 
 
@@ -114,7 +114,45 @@
 
 <script>
     $(document).ready(function() {
-        $('#BarangkeluarTable').DataTable();
+        $(".datatable").on("click", ".btn-delete", function (e) {
+                e.preventDefault();
+
+                var form = $(this).closest("form");
+                var name = $(this).data("name");
+
+                Swal.fire({
+                    title: "Yakin Ingin Menghapus\n" + name + "?",
+                    text: "Data Akan Terhapus!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "bg-danger",
+                    confirmButtonText: "Yakin!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        $('#BarangkeluarTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '<?php echo route('barangkeluar.getData'); ?>',
+            columns: [
+                { data: 'id', name: 'id', visible: true },
+                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                { data: 'nama_customer', name: 'nama_customer' },
+                { data: 'nama_barang', name: 'nama_barang' },
+                { data: 'harga_jual', name: 'harga_jual' },
+                { data: 'formatted_tanggal_beli', name: 'tanggal_beli' },
+                { data: 'jumlah_terjual', name: 'jumlah_terjual' },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+            ],
+            order: [[0, 'desc']],
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, 'All'],
+            ],
+        });
     });
 </script>
 
