@@ -17,7 +17,7 @@ class BarangmasukExport implements FromView, WithStyles, ShouldAutoSize
      */
     public function view(): View
     {
-        return view('exports.barangmasuk', [
+        return view('barangmasuk.export_excel', [
             'barangmasuk' => Barangmasuk::all()
         ]);
     }

@@ -87,7 +87,7 @@ unset($__errorArgs, $__bag); ?>
 
                                 <div class="form-group mt-3 mb-3">
                                     <label for="tanggal_beli">Tanggal Beli</label>
-                                    <input type="text" class="form-control <?php $__errorArgs = ['tanggal_beli'];
+                                    <input type="date" class="form-control <?php $__errorArgs = ['tanggal_beli'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

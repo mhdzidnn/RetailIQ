@@ -47,7 +47,7 @@
 
                                 <div class="form-group mt-3 mb-3">
                                     <label for="tanggal_beli">Tanggal Beli</label>
-                                    <input type="text" class="form-control @error('tanggal_beli') is-invalid @enderror" name="tanggal_beli" value="{{ old('tanggal_beli') }}" id="tanggal_beli"
+                                    <input type="date" class="form-control @error('tanggal_beli') is-invalid @enderror" name="tanggal_beli" value="{{ old('tanggal_beli') }}" id="tanggal_beli"
                                         placeholder="yy/mm/dd" pattern="\d{4}/\d{2}/\d{2}" required>
                                     @error('tanggal_beli')
                                         <span class="invalid-feedback">{{ $message }}</span>

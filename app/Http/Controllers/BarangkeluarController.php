@@ -14,6 +14,7 @@ use App\Exports\BarangkeluarExport;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use PDF;
+use DataTables;
 
 
 class BarangkeluarController extends Controller
@@ -170,5 +171,28 @@ class BarangkeluarController extends Controller
         return $pdf->download('barangkeluar.pdf');
     }
 
-    
+    public function getData(Request $request)
+    {
+        $user = Auth::user(); // Get the currently authenticated user
+        $barangkeluar = Barangkeluar::where('user_id', $user->id);
+
+        return DataTables::of($barangkeluar)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $btn = '<a href="' . route('show-keluar', ['id' => $row->id]) . '" class="btn btn-warning">
+                            <i class="bi bi-eye"></i>
+                        </a>';
+                $btn .= ' <form action="' . route('barangkeluar.destroy', ['id' => $row->id]) . '" method="POST" style="display: inline;">
+                            ' . csrf_field() . '
+                            ' . method_field("DELETE") . '
+                            <button type="submit" class="btn-delete btn btn-danger" data-name="' . $row->nama_customer . '">
+                                <i class="bi-trash"></i>
+                            </button>
+                        </form>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
 }

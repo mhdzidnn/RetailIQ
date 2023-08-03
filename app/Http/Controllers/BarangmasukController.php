@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use DataTables;
 
 
+
 class BarangmasukController extends Controller
 {
     /**
@@ -159,6 +160,12 @@ class BarangmasukController extends Controller
 
     public function exportExcel()
     {
+        $directoryPath = 'path/to/directory';
+
+        // Periksa apakah direktori sudah ada, jika belum, buat direktori
+        if (!file_exists($directoryPath)) {
+            mkdir($directoryPath, 0777, true);
+        }
         return Excel::download(new BarangmasukExport, 'barangmasuk.xlsx');
     }
 
@@ -172,33 +179,32 @@ class BarangmasukController extends Controller
     public function getData(Request $request)
     {
         $user = Auth::user(); // Get the currently authenticated user
-        $inventory = Barangmasuk::where('user_id', $user->id)->with('position');
+        $barangmasuk = Barangmasuk::where('user_id', $user->id);
 
-        if ($request->ajax()) {
-            return datatables()->of($inventory)
-                ->addIndexColumn()
-                ->addColumn('actions', function ($row) {
-                    // Kolom ini digunakan untuk menambahkan tombol aksi
-                    $btn = '<a href="' . route('show', ['id' => $row->id]) . '" class="btn btn-warning">
-                                <i class="bi bi-eye"></i>
-                            </a>';
-                    $btn .= ' <form action="' . route('barangmasuk.destroy', ['id' => $row->id]) . '" method="POST" style="display: inline;">
-                                ' . csrf_field() . '
-                                ' . method_field("DELETE") . '
-                                <button type="submit" class="btn-delete btn btn-danger" data-name="' . $row->nama_barang . '">
-                                    <i class="bi-trash"></i>
-                                </button>
-                            </form>';
-                    return $btn;
-                })
-                ->rawColumns(['actions'])
-                ->toJson();
-        }
-}
-
-
-
-
-
+        return DataTables::of($barangmasuk)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                $btn = '<a href="' . route('show', ['id' => $row->id]) . '" class="btn btn-warning">
+                            <i class="bi bi-eye"></i>
+                        </a>';
+                $btn .= ' <form action="' . route('barangmasuk.destroy', ['id' => $row->id]) . '" method="POST" style="display: inline;">
+                            ' . csrf_field() . '
+                            ' . method_field("DELETE") . '
+                            <button type="submit" class="btn-delete btn btn-danger" data-name="' . $row->nama_barang . '">
+                                <i class="bi-trash"></i>
+                            </button>
+                        </form>';
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
 
 }
+
+
+
+
+
+
+
