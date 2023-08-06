@@ -100,7 +100,7 @@
             ajax: '<?php echo route('barangmasuk.getData'); ?>',
             columns: [
                 { data: 'id', name: 'id', visible: true },
-                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'nama_barang', name: 'nama_barang' },
                 { data: 'formatted_harga_awal', name: 'harga_awal' },
                 { data: 'jumlah', name: 'jumlah' },

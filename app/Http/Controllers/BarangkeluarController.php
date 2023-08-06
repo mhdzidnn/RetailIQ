@@ -174,7 +174,13 @@ class BarangkeluarController extends Controller
     public function getData(Request $request)
     {
         $user = Auth::user(); // Get the currently authenticated user
-        $barangkeluar = Barangkeluar::where('user_id', $user->id);
+        $barangkeluar = Barangkeluar::where('user_id', $user->id)
+        ->get()
+        ->map(function ($item) {
+            // Format tanggal sesuai dengan kebutuhan, misalnya: 'd/m/Y'
+            $item->formatted_tanggal_beli = date('d/m/Y', strtotime($item->tanggal_beli));
+            return $item;
+        });
 
         return DataTables::of($barangkeluar)
             ->addIndexColumn()

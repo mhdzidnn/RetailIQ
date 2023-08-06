@@ -104,7 +104,6 @@
         }
     </style>
 
-
 </body>
 
 
@@ -112,5 +111,18 @@
 <script src="{{ asset('assets/js/main.js') }}"></script>
 @vite('resources/js/app.js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.getElementById('nama_barang').addEventListener('change', function() {
+            var selectedValue = this.value;
+            var inputBarangLainnya = document.getElementById('div_nama_barang_lainnya');
 
+            if (selectedValue === 'lainnya') {
+                inputBarangLainnya.style.display = 'block';
+                inputBarangLainnya.setAttribute('required', 'required');
+            } else {
+                inputBarangLainnya.style.display = 'none';
+                inputBarangLainnya.removeAttribute('required');
+            }
+        });
+    </script>
 </html>

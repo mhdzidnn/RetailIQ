@@ -94,4 +94,8 @@ Contact Us
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');
 Route::post('/contact-us/store', [ContactUsController::class, 'store'])->name('store-contact-us');
 
+Route::get('download-file/{barangmasukId}', [BarangmasukController::class,
+'downloadFile'])->name('barangmasuk.downloadFile');
 
+Route::get('download-file/{barangkeluarId}', [BarangkeluarController::class,
+'downloadFile'])->name('barangkeluar.downloadFile');

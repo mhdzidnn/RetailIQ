@@ -26,10 +26,13 @@
                                 <div class="form-group mt-3 mb-3">
                                     <label for="nama_barang">Nama Barang</label>
                                     <select class="form-control @error('nama_barang') is-invalid @enderror" name="nama_barang" id="nama_barang" value="{{ old('nama_barang') }}" required>
-                                        <option disabled selected>-- Pilih Kategori --</option>
-                                        <option value="Air Galon Aqua">Air Galon Aqua</option>
-                                        <option value="Air Galon Sanford">Air Galon Sanford</option>
-                                        <option value="Air Galon Mindy">Air Galon Mindy</option>
+                                        <option disabled selected>-- Pilih Barang --</option>
+                                        <option value="Rolex GMT-Master II">Jam Tangan Rolex GMT-Master II</option>
+                                        <option value="Rolex Day-Date">Jam Tangan Rolex Day-Date (Presidential)</option>
+                                        <option value="Rolex Yacht-Master">Jam Tangan Rolex Yacht-Master</option>
+                                        <option value="Casio Baby-G">Jam Tangan Casio Baby-G</option>
+                                        <option value="Casio Classic">Jam Tangan Casio Classic</option>
+                                        <option value="Tissot PRC 200">Jam Tangan Tissot PRC 200</option>
                                     </select>
                                     @error('nama_barang')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -73,8 +76,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-        </section><!-- End Contact Us Section -->
+        </section>
     </section>
 @endsection
