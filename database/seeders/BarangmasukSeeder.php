@@ -2,17 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Barangmasuk;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Barangmasuk;
+// use App\Database\Factories\BarangmasukFactory;
 
 class BarangmasukSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        Barangmasuk::factory()->count(20)->create();
+        // Menggunakan Factory untuk membuat 10 data palsu
+        Barangmasuk::factory()->count(50)->create();
     }
 }

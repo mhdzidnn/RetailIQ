@@ -2,37 +2,6 @@
 
 @section('container')
 
-
-{{-- {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script> --}}
-
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $(".datatable").on("click", ".btn-delete", function (e) {
-                e.preventDefault();
-
-                var form = $(this).closest("form");
-                var name = $(this).data("name");
-
-                Swal.fire({
-                    title: "Yakin Ingin Menghapus\n" + name + "?",
-                    text: "Data Akan Terhapus!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonClass: "bg-danger",
-                    confirmButtonText: "Yakin!",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
-                });
-            });
-        });
-    </script>
-@endpush --}}
-
-
-
     <section id="contact" class="contact">
             <div class="container" data-aos="fade-up">
                 <div class="section-title mt-5">
@@ -70,7 +39,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($barangkeluar as $item)
+                                        {{-- @foreach ($barangkeluar as $item)
                                             <tr>
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{$item->nama_customer}}</td>
@@ -94,7 +63,7 @@
                                                     {{-- <button class="btn btn-danger btn-sm hapus" data-toggle="modal"
                                                         data-target="#ModalDelete" data-id='#'><i
                                                             class="fas fa-trash"></i></button> --}}
-                                                </td>
+                                                {{-- </td> --}} --}}
                                                 {{-- <!-- Modal -->
                                                 <div class="modal fade" id="ModalDelete" tabindex="-1"
                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -126,12 +95,11 @@
                                                         </div>
                                                     </div>
                                                 </div> --}}
-                                            </tr>
-                                        @endforeach
+                                            {{-- </tr>
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -139,21 +107,10 @@
     </section>
 @endsection
 
-
-
-{{-- @push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#barangkeluarTable').DataTable();
-        });
-    </script>
-@endpush
-@endsection --}}
-
 @vite('resources/js/app.js')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         $(".datatable").on("click", ".btn-delete", function (e) {
                 e.preventDefault();
@@ -180,7 +137,7 @@
             ajax: '{!! route('barangkeluar.getData') !!}',
             columns: [
                 { data: 'id', name: 'id', visible: true },
-                { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+                // { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'nama_customer', name: 'nama_customer' },
                 { data: 'nama_barang', name: 'nama_barang' },
                 { data: 'harga_jual', name: 'harga_jual' },
@@ -195,5 +152,4 @@
             ],
         });
     });
-</script>
-
+</script> --}}

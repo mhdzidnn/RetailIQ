@@ -25,7 +25,7 @@ class UpdateFinanceData implements ShouldQueue
         $totalPemasukan = 0;
 
         foreach ($inventoryData as $item) {
-            $totalPengeluaran += $item->harga_beli * ($item->jumlah_stok + $item->jumlah_terjual);
+            $totalPengeluaran += $item->harga_beli * $item->jumlah_stok;
             $totalPemasukan += $item->harga_jual * $item->jumlah_terjual;
         }
 

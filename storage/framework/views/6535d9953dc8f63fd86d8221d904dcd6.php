@@ -45,10 +45,13 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>" name="nama_barang" id="nama_barang" value="<?php echo e(old('nama_barang')); ?>" required>
-                                        <option disabled selected>-- Pilih Kategori --</option>
-                                        <option value="Air Galon Aqua">Air Galon Aqua</option>
-                                        <option value="Air Galon Sanford">Air Galon Sanford</option>
-                                        <option value="Air Galon Mindy">Air Galon Mindy</option>
+                                        <option disabled selected>-- Pilih Barang --</option>
+                                        <option value="Rolex GMT-Master II">Jam Tangan Rolex GMT-Master II</option>
+                                        <option value="Rolex Day-Date">Jam Tangan Rolex Day-Date (Presidential)</option>
+                                        <option value="Rolex Yacht-Master">Jam Tangan Rolex Yacht-Master</option>
+                                        <option value="Casio Baby-G">Jam Tangan Casio Baby-G</option>
+                                        <option value="Casio Classic">Jam Tangan Casio Classic</option>
+                                        <option value="Tissot PRC 200">Jam Tangan Tissot PRC 200</option>
                                     </select>
                                     <?php $__errorArgs = ['nama_barang'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -141,9 +144,8 @@ unset($__errorArgs, $__bag); ?>
                         </div>
                     </div>
                 </div>
-
             </div>
-        </section><!-- End Contact Us Section -->
+        </section>
     </section>
 <?php $__env->stopSection(); ?>
 

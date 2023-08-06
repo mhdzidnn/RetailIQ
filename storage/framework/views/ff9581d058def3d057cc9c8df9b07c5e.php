@@ -104,7 +104,6 @@
         }
     </style>
 
-
 </body>
 
 
@@ -112,6 +111,19 @@
 <script src="<?php echo e(asset('assets/js/main.js')); ?>"></script>
 <?php echo app('Illuminate\Foundation\Vite')('resources/js/app.js'); ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.getElementById('nama_barang').addEventListener('change', function() {
+            var selectedValue = this.value;
+            var inputBarangLainnya = document.getElementById('div_nama_barang_lainnya');
 
+            if (selectedValue === 'lainnya') {
+                inputBarangLainnya.style.display = 'block';
+                inputBarangLainnya.setAttribute('required', 'required');
+            } else {
+                inputBarangLainnya.style.display = 'none';
+                inputBarangLainnya.removeAttribute('required');
+            }
+        });
+    </script>
 </html>
 <?php /**PATH C:\Users\Dell\RetailIQ\resources\views/layouts/main.blade.php ENDPATH**/ ?>

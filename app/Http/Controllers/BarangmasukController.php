@@ -179,7 +179,13 @@ class BarangmasukController extends Controller
     public function getData(Request $request)
     {
         $user = Auth::user(); // Get the currently authenticated user
-        $barangmasuk = Barangmasuk::where('user_id', $user->id);
+        $barangmasuk = Barangmasuk::where('user_id', $user->id)
+            ->get()
+            ->map(function ($item)
+            {
+                $item->formatted_harga_awal = 'Rp' . number_format($item->harga_awal, 0, ',', '.');
+                return $item;
+            });
 
         return DataTables::of($barangmasuk)
             ->addIndexColumn()

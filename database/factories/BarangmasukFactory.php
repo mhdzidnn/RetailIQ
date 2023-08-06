@@ -2,27 +2,26 @@
 
 namespace Database\Factories;
 
+use App\Models\Barangmasuk;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Generator as Faker;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Barangmasuk>
- */
 class BarangmasukFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Barangmasuk::class;
+
+    public function definition()
     {
+        // Ambil user yang ada atau buat user baru jika tidak ada
+        $userId = User::inRandomOrder()->first()->id ?? User::factory()->create()->id;
+
         return [
-            'user_id' => function () {
-                return \App\Models\User::factory()->create()->id;
-            },
-            'nama_barang' => $this->faker->word(),
-            'harga_awal' => $this->faker->randomNumber(),
-            'jumlah' => $this->faker->randomNumber(),
+            'user_id' => $userId, // Jika Anda memiliki relasi dengan model User
+            'nama_barang' => $this->faker->word,
+            'harga_awal' => $this->faker->numberBetween(1000, 10000),
+            'jumlah' => $this->faker->numberBetween(1, 100),
+            // Tambahkan field lain sesuai kebutuhan...
         ];
     }
 }
