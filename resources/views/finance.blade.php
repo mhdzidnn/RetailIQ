@@ -74,7 +74,7 @@
                     data: [
                         {{ $totalPengeluaran }},
                         {{ $totalPemasukan }},
-                        {{ abs($totalKeuntungan) }}
+                        {{ $totalKeuntungan }}
                     ],
                     backgroundColor: [
                         "rgba(255, 0, 0, 0.5)",

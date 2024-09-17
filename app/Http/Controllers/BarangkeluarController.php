@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BarangkeluarRequest;
-use App\Exports\BarangkeluarExport; // Pastikan Anda telah mengimpor BarangkeluarExport
 use App\Models\Barangkeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel; // Pa
+use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BarangkeluarExport;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 use PDF;
 
 
@@ -45,16 +48,34 @@ class BarangkeluarController extends Controller
     public function store(BarangkeluarRequest $request)
     {
         $user = Auth::user(); // Get the currently authenticated user
-        // Handle file upload
+
+        // Handle file upload (optional, if you have a file to upload)
         $originalFilename = null;
         $encryptedFilename = null;
-        if ($request->hasFile('Invoice')) {
-            $file = $request->file('Invoice');
+        if ($request->hasFile('file_upload')) {
+            $file = $request->file('file_upload');
             $originalFilename = $file->getClientOriginalName();
             $encryptedFilename = $file->hashName();
             $file->store('public/files');
         }
-        $barangkeluar=Barangkeluar::create([
+
+        // Cek apakah stok cukup
+        $inventory = Inventory::where('nama_barang', $request->nama_barang)->first();
+
+        if (!$inventory) {
+            return redirect()->back()->withErrors('Barang tidak ditemukan di inventory.');
+        }
+
+        // Menggunakan Validator untuk memastikan jumlah terjual tidak melebihi stok yang tersedia
+        $validator = Validator::make($request->all(), [
+            'jumlah_terjual' => 'numeric|max:' . $inventory->stok,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        // Jika stok mencukupi, simpan data barang keluar dan update entri Inventory
+        Barangkeluar::create([
             'user_id' => $user->id,
             'nama_customer' => $request->nama_customer,
             'nama_barang' => $request->nama_barang,
@@ -63,23 +84,21 @@ class BarangkeluarController extends Controller
             'jumlah_terjual' => $request->jumlah_terjual,
             'original_filename' => $originalFilename,
             'encrypted_filename' => $encryptedFilename,
+
         ]);
+        //  // Update entri Inventory
+        $inventory = Inventory::where('nama_barang', $request->nama_barang)->first();
 
-        // Update atau buat entri Inventory
-        $inventory = Inventory::updateOrCreate(
-            ['nama_barang' => $request->nama_barang],
-            [
-                'harga_jual' => $request->harga_jual, 
-                'tanggal_beli' => $request->tanggal_beli,
-                'stok' => DB::raw('stok + ' . $request->jumlah_terjual),
-            ]
-        );
-
-        // Simpan data barangmasuk
-        $barangkeluar->save();
-
+        if ($inventory) {
+            $inventory->stok -= $request->jumlah_terjual;
+            $inventory->jumlah_terjual += $request->jumlah_terjual;
+            $inventory->harga_jual = $request->harga_jual;
+            $inventory->save();
+        }
+        Alert::success('Berhasil Ditambahkan', 'Data Berhasil Ditambahkan.');
         return redirect('/barangkeluar');
     }
+
 
     /**
      * Display the specified resource.
@@ -88,22 +107,17 @@ class BarangkeluarController extends Controller
     {
         $barangkeluar = Barangkeluar::findOrFail($id);
 
-    return view('barangkeluar.show-keluar', [
-        'title' => 'Detail Barang Keluar',
-        'barangkeluar' => $barangkeluar
-    ]);
+        return view('barangkeluar.show-keluar', [
+            'title' => 'Detail Barang Keluar',
+            'barangkeluar' => $barangkeluar
+        ]);
     }
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        $selected = Barangkeluar::findOrFail($id);
-        return view('barangkeluar.edit-keluar', [
-            'title' => 'Edit Barang Keluar',
-            'selected' => $selected
-        ]);
+
     }
 
     /**
@@ -111,25 +125,7 @@ class BarangkeluarController extends Controller
      */
     public function update(BarangkeluarRequest $request, $id)
     {
-        $data = $request->validated();
 
-        $barangkeluar = Barangkeluar::findOrFail($id);
-
-        // Handle file upload
-        if ($request->hasFile('Invoice')) {
-            // Hapus file CV lama jika ada
-            if ($barangkeluar->encrypted_filename) {
-                Storage::disk('public')->delete('files/' . $barangkeluar->encrypted_filename);
-            }
-
-            // Upload file CV yang baru
-            $file = $request->file('Invoice');
-            $data['original_filename'] = $file->getClientOriginalName();
-            $data['encrypted_filename'] = $file->storeAs('public/files', $file->hashName());
-        }
-
-        $barangkeluar->update($data);
-        return redirect('/barangkeluar');
     }
 
     /**
@@ -142,8 +138,9 @@ class BarangkeluarController extends Controller
         if ($selected->encrypted_filename) {
             Storage::disk('public')->delete('files/' . $selected->encrypted_filename);
         }
-        
+
         $selected->delete();
+        Alert::success('Berhasil Dihapus', 'Data Berhasil Dihapus.');
         return redirect('/barangkeluar');
     }
 
@@ -157,23 +154,21 @@ class BarangkeluarController extends Controller
             return response()->download($path, $barangkeluar->original_filename);
         } else {
             // Jika file tidak ditemukan, Anda dapat mengembalikan response sesuai kebutuhan.
-            return response()->json(['message' => 'File ini tidak ditemukan'], 404);}
+            return response()->json(['message' => 'File tidak ditemukan'], 404);
+        }
     }
+
     public function exportExcel()
     {
-        $user = Auth::user(); // Get the currently authenticated user
-        $barangkeluar = Barangkeluar::where('user_id', $user->id)->get(); // Fetch data for the current user
-
-        return Excel::download(new BarangkeluarExport(), 'barangkeluar.xlsx');
+        return Excel::download(new BarangkeluarExport, 'barangkeluar.xlsx');
     }
+
     public function exportPdf()
-{
-    $barangkeluar    = Barangkeluar::all();
+    {
+        $barangkeluar = Barangkeluar::all();
+        $pdf = PDF::loadView('barangkeluar.export_pdf', compact('barangkeluar'));
+        return $pdf->download('barangkeluar.pdf');
+    }
 
-    $pdf = PDF::loadView('barangkeluar.export_pdf', compact('barangkeluar'));
-
-    return $pdf->download('barangkeluar.pdf');
+    
 }
-
-}
-
