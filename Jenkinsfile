@@ -8,5 +8,3 @@ pipeline{
 		}
 	}
 }
-
-Apply > save > build now
